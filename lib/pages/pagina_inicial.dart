@@ -5,7 +5,6 @@ import '../controllers/restaurante_controller.dart';
 import '../models/restauranteModel.dart';
 import '../models/pesquisaModel.dart';
 import 'pesquisa.dart';
-import 'score_page.dart';
 
 class PaginaInicial extends StatefulWidget {
   @override

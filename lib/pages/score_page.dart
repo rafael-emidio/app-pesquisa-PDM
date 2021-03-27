@@ -45,9 +45,8 @@ class _ScorePageState extends State<ScorePage> {
               //mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                  padding: EdgeInsets.all(24),
-                  child: Image.network(
-                      'https://www.kindpng.com/picc/m/8-80851_chef-png-png-gorro-de-cocinero-png-transparent.png'),
+                  padding: EdgeInsets.all(0),
+                  child: Image.asset('assets/images/score.png'),
                 ),
                 Text(
                   'Seu score atual é de: Pontos aqui', //${widget.user.score}
@@ -55,7 +54,84 @@ class _ScorePageState extends State<ScorePage> {
                 ),
               ],
             ),
-            Container(),
+            Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Column(
+                        children: [
+                          Image.asset(
+                            'assets/images/score_5.png',
+                            width: 150,
+                          ),
+                          Text("100 Pontos",
+                              style: TextStyle(
+                                  fontSize: 24, color: Colors.red[700])),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Column(
+                        children: [
+                          Image.asset(
+                            'assets/images/score_3.png',
+                            width: 130,
+                          ),
+                          Text("25 Pontos",
+                              style: TextStyle(
+                                  fontSize: 20, color: Colors.red[700])),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Image.asset(
+                            'assets/images/score_4.png',
+                            width: 130,
+                          ),
+                          Text("50 Pontos",
+                              style: TextStyle(
+                                  fontSize: 20, color: Colors.red[700])),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Column(
+                        children: [
+                          Image.asset(
+                            'assets/images/score_1.jpg',
+                            width: 130,
+                          ),
+                          Text("1 Ponto",
+                              style: TextStyle(
+                                  fontSize: 20, color: Colors.red[700])),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Image.asset(
+                            'assets/images/score_2.jpg',
+                            width: 130,
+                          ),
+                          Text("10 Pontos",
+                              style: TextStyle(
+                                  fontSize: 20, color: Colors.red[700])),
+                        ],
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            )
           ],
         ),
       ),
