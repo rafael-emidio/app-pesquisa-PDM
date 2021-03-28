@@ -9,6 +9,7 @@ class ScorePage extends StatefulWidget {
 }
 
 class _ScorePageState extends State<ScorePage> {
+  int teste = 0;
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(

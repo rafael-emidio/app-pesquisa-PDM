@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/pages/score_page.dart';
 import '../controllers/restaurante_controller.dart';
 import '../models/restauranteModel.dart';
 import '../models/pesquisaModel.dart';
 import 'pesquisa.dart';
+import 'score_page.dart';
 
 class PaginaInicial extends StatefulWidget {
   @override
@@ -22,7 +21,6 @@ class _PaginaInicialState extends State<PaginaInicial> {
 
   salvarPesquisa(PesquisaModel pesquisa) {
     Navigator.pop(context);
-
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text('Obrigado por avaliar! sua resposta foi salva.',
             style: TextStyle(fontSize: 16))));
@@ -32,7 +30,8 @@ class _PaginaInicialState extends State<PaginaInicial> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('App Pesquisa de Satisfação :)'),
+          title: Text('Pesquisa de satisfação'),
+          leading: Icon(Icons.mood),
           actions: [
             IconButton(
                 icon: Icon(Icons.star),
