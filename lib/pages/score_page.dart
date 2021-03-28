@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 class ScorePage extends StatefulWidget {
   //User user;
@@ -9,7 +10,6 @@ class ScorePage extends StatefulWidget {
 }
 
 class _ScorePageState extends State<ScorePage> {
-  int teste = 0;
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -56,18 +56,19 @@ class _ScorePageState extends State<ScorePage> {
               ],
             ),
             Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+              child: ListView(
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Column(
                         children: [
-                          Image.asset(
-                            'assets/images/score_5.png',
-                            width: 150,
+                          Opacity(
+                            opacity: 0.25,
+                            child: Image.asset(
+                              'assets/images/score_5.png',
+                              width: 250,
+                            ),
                           ),
                           Text("100 Pontos",
                               style: TextStyle(
@@ -81,9 +82,12 @@ class _ScorePageState extends State<ScorePage> {
                     children: [
                       Column(
                         children: [
-                          Image.asset(
-                            'assets/images/score_3.png',
-                            width: 130,
+                          Opacity(
+                            opacity: 0.25,
+                            child: Image.asset(
+                              'assets/images/score_3.png',
+                              width: 130,
+                            ),
                           ),
                           Text("25 Pontos",
                               style: TextStyle(
@@ -92,9 +96,12 @@ class _ScorePageState extends State<ScorePage> {
                       ),
                       Column(
                         children: [
-                          Image.asset(
-                            'assets/images/score_4.png',
-                            width: 130,
+                          Opacity(
+                            opacity: 0.25,
+                            child: Image.asset(
+                              'assets/images/score_4.png',
+                              width: 130,
+                            ),
                           ),
                           Text("50 Pontos",
                               style: TextStyle(
@@ -108,9 +115,12 @@ class _ScorePageState extends State<ScorePage> {
                     children: [
                       Column(
                         children: [
-                          Image.asset(
-                            'assets/images/score_1.jpg',
-                            width: 130,
+                          Opacity(
+                            opacity: 0.25,
+                            child: Image.asset(
+                              'assets/images/score_1.jpg',
+                              width: 130,
+                            ),
                           ),
                           Text("1 Ponto",
                               style: TextStyle(
@@ -119,9 +129,12 @@ class _ScorePageState extends State<ScorePage> {
                       ),
                       Column(
                         children: [
-                          Image.asset(
-                            'assets/images/score_2.jpg',
-                            width: 130,
+                          Opacity(
+                            opacity: 0.25,
+                            child: Image.asset(
+                              'assets/images/score_2.jpg',
+                              width: 130,
+                            ),
                           ),
                           Text("10 Pontos",
                               style: TextStyle(
