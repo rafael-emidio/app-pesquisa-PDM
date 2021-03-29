@@ -22,20 +22,20 @@ O aplicativo apresenta uma lista de empresas do ramo alimentício, o usuário po
 ### Instalação:
 - Download do código fonte através do link https://github.com/rafael-emidio/app-pesquisa-PDM
 - Descompactar arquivo baixado
-- Abrir CMD (Windows) ou Terminal (Linux), entrar na pasta descompactada do projeto e executar o comando "flutter pub get"
+- Abrir CMD (Windows) ou Terminal (Linux), entrar na pasta descompactada do projeto e executar o comando `flutter pub get`
 - Executar aplicativo pelo Android Studio:
 	- Abrir pasta descompactada
 	- Iniciar emulador de dispositivo móvel já configurado
 	- Selecionar o dispositivo iniciado
-	- Selecionar o arquivo "main.dart"
-	- Pressionar a opção 'Run'
+	- Selecionar o arquivo `main.dart`
+	- Pressionar a opção `Run`
 - Executar aplicativo pelo Visual Code Studio:
 	- Abrir pasta descompactada
 	- No canto inferior direito pressionar o dispositivo selecionado
-	- Escolher a opção 'Start mobile emulator' ja configurado
+	- Escolher a opção `Start mobile emulator` já configurado
 	- Selecionar o dispositivo iniciado
-	- Selecionar o arquivo "main.dart"
-	- Na barra de opções no canto superior direito selecionar 'Run' e escolher a opção 'Start debugging'
+	- Selecionar o arquivo `main.dart`
+	- Na barra de opções no canto superior direito selecionar `Run` e escolher a opção `Start debugging`
 
 ### Atividades desenvolvidas:
 - Jhenyfer:
