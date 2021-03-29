@@ -13,7 +13,7 @@ class AppPesquisa extends StatelessWidget {
       title: 'Pesquisas de Satisfação',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.indigo,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         brightness: Brightness.light,
       ),

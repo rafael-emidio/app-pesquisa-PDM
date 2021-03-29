@@ -31,7 +31,6 @@ class _PaginaInicialState extends State<PaginaInicial> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Pesquisa de satisfação'),
-          leading: Icon(Icons.mood),
           actions: [
             IconButton(
                 icon: Icon(Icons.star),

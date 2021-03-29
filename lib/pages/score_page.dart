@@ -16,13 +16,7 @@ class _ScorePageState extends State<ScorePage> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          actions: [
-            IconButton(
-              icon: Icon(Icons.settings),
-              onPressed: () => print('Tela de configurações (se tiver)'),
-            ),
-          ],
-          title: Text("Nome aqui"), //widget.user.nome
+          title: Text("Pesquisa de satisfação"), //widget.user.nome
           bottom: TabBar(
             tabs: [
               Tab(
@@ -50,7 +44,7 @@ class _ScorePageState extends State<ScorePage> {
                   child: Image.asset('assets/images/score.png'),
                 ),
                 Text(
-                  'Seu score atual é de: Pontos aqui', //${widget.user.score}
+                  'Seu score atual é de: 0.0', //${widget.user.score}
                   style: TextStyle(fontSize: 24),
                 ),
               ],
@@ -78,7 +72,7 @@ class _ScorePageState extends State<ScorePage> {
                             ),
                           Text("100 Pontos",
                               style: TextStyle(
-                                  fontSize: 24, color: Colors.red[700])),
+                                  fontSize: 24, color: Colors.indigo)),
                         ],
                       ),
                     ],
@@ -103,7 +97,7 @@ class _ScorePageState extends State<ScorePage> {
                             ),
                           Text("25 Pontos",
                               style: TextStyle(
-                                  fontSize: 20, color: Colors.red[700])),
+                                  fontSize: 20, color: Colors.indigo)),
                         ],
                       ),
                       Column(
@@ -123,7 +117,7 @@ class _ScorePageState extends State<ScorePage> {
                             ),
                           Text("50 Pontos",
                               style: TextStyle(
-                                  fontSize: 20, color: Colors.red[700])),
+                                  fontSize: 20, color: Colors.indigo)),
                         ],
                       ),
                     ],
@@ -148,7 +142,7 @@ class _ScorePageState extends State<ScorePage> {
                             ),
                           Text("1 Ponto",
                               style: TextStyle(
-                                  fontSize: 20, color: Colors.red[700])),
+                                  fontSize: 20, color: Colors.indigo)),
                         ],
                       ),
                       Column(
@@ -168,7 +162,7 @@ class _ScorePageState extends State<ScorePage> {
                             ),
                           Text("10 Pontos",
                               style: TextStyle(
-                                  fontSize: 20, color: Colors.red[700])),
+                                  fontSize: 20, color: Colors.indigo)),
                         ],
                       ),
                     ],

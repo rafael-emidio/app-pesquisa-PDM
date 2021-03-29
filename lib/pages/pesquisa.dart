@@ -4,7 +4,6 @@ import '../models/restauranteModel.dart';
 //import 'package:smooth_star_rating/smooth_star_rating.dart';
 import '../models/pesquisaModel.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:validators/validators.dart';
 
 class Pesquisa extends StatefulWidget {
   RestauranteModel restaurante;
@@ -54,8 +53,8 @@ class _PesquisaState extends State<Pesquisa> {
             RatingBar.builder(
               initialRating: 0,
               itemCount: 5,
-              itemBuilder: (context, index) {
-                switch (index) {
+              itemBuilder: (context, i) {
+                switch (i) {
                   case 0:
                     return Icon(
                       Icons.sentiment_very_dissatisfied,
@@ -81,6 +80,8 @@ class _PesquisaState extends State<Pesquisa> {
                       Icons.sentiment_very_satisfied,
                       color: Colors.green,
                     );
+                  default:
+                    return null;
                 }
               },
               onRatingUpdate: (rating) {
@@ -98,8 +99,8 @@ class _PesquisaState extends State<Pesquisa> {
             RatingBar.builder(
               initialRating: 0,
               itemCount: 5,
-              itemBuilder: (context, index) {
-                switch (index) {
+              itemBuilder: (context, i) {
+                switch (i) {
                   case 0:
                     return Icon(
                       Icons.sentiment_very_dissatisfied,
@@ -125,6 +126,8 @@ class _PesquisaState extends State<Pesquisa> {
                       Icons.sentiment_very_satisfied,
                       color: Colors.green,
                     );
+                  default:
+                    return null;
                 }
               },
               onRatingUpdate: (rating) {
@@ -140,8 +143,8 @@ class _PesquisaState extends State<Pesquisa> {
             RatingBar.builder(
               initialRating: 0,
               itemCount: 5,
-              itemBuilder: (context, index) {
-                switch (index) {
+              itemBuilder: (context, i) {
+                switch (i) {
                   case 0:
                     return Icon(
                       Icons.sentiment_very_dissatisfied,
@@ -167,6 +170,8 @@ class _PesquisaState extends State<Pesquisa> {
                       Icons.sentiment_very_satisfied,
                       color: Colors.green,
                     );
+                  default:
+                    return null;
                 }
               },
               onRatingUpdate: (rating) {
@@ -182,8 +187,8 @@ class _PesquisaState extends State<Pesquisa> {
             RatingBar.builder(
               initialRating: 0,
               itemCount: 5,
-              itemBuilder: (context, index) {
-                switch (index) {
+              itemBuilder: (context, i) {
+                switch (i) {
                   case 0:
                     return Icon(
                       Icons.sentiment_very_dissatisfied,
@@ -209,6 +214,8 @@ class _PesquisaState extends State<Pesquisa> {
                       Icons.sentiment_very_satisfied,
                       color: Colors.green,
                     );
+                  default:
+                    return null;
                 }
               },
               onRatingUpdate: (rating) {
@@ -224,8 +231,8 @@ class _PesquisaState extends State<Pesquisa> {
             RatingBar.builder(
               initialRating: 0,
               itemCount: 5,
-              itemBuilder: (context, index) {
-                switch (index) {
+              itemBuilder: (context, i) {
+                switch (i) {
                   case 0:
                     return Icon(
                       Icons.sentiment_very_dissatisfied,
@@ -251,6 +258,8 @@ class _PesquisaState extends State<Pesquisa> {
                       Icons.sentiment_very_satisfied,
                       color: Colors.green,
                     );
+                  default:
+                    return null;
                 }
               },
               onRatingUpdate: (rating) {
@@ -329,16 +338,17 @@ class _PesquisaState extends State<Pesquisa> {
   showAlertDialog(BuildContext context) {
     // configura o button
     Widget concluido = TextButton(
-      child: Text("OK"),
-      onPressed: () {
-        widget.onSave(this.pesquisa);
-        Navigator.pop(context);
-      },
+      child: ElevatedButton.icon(
+          onPressed: () {
+            widget.onSave(this.pesquisa);
+            Navigator.pop(context);
+          },
+          label: Text('Avaliação concluída'),
+          icon: Icon(Icons.check)),
     );
 
     // configura o  AlertDialog
     AlertDialog alerta = AlertDialog(
-      title: Text("Avaliação concluída!"),
       actions: [
         concluido,
       ],
@@ -355,10 +365,12 @@ class _PesquisaState extends State<Pesquisa> {
   error(BuildContext context) {
     // configura o button
     Widget faltante = TextButton(
-      child: Text("OK"),
-      onPressed: () {
-        Navigator.of(context).pop(false);
-      },
+      child: ElevatedButton(
+        child: Text("OK"),
+        onPressed: () {
+          Navigator.of(context).pop(false);
+        },
+      ),
     );
 
     // configura o  AlertDialog
