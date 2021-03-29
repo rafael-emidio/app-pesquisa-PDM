@@ -17,12 +17,12 @@ class RestaurantesRep {
           'Chiquinho sorvetes'),
       RestauranteModel(
           3,
-          'https://static.wixstatic.com/media/bf9bf7_d71a2d889f7f48548d6154eb980d638f~mv2.png/v1/fill/w_239,h_104,al_c,q_85,usm_0.66_1.00_0.01/Adobe_20190830_110758.webp',
-          'Espeto D Ponta'),
+          'https://d25dk4h1q4vl9b.cloudfront.net/bundles/front/media/images/header/mcdonalds-logo.png',
+          'McDonalds'),
       RestauranteModel(
           4,
-          'https://www.bibasdelivery.com.br/admin/logo/file_5d01619e17641.jpg',
-          'Bibas'),
+          'https://finistore.vteximg.com.br/arquivos/ids/160931/new-logo.png?v=637413261489530000',
+          'Fini'),
     ]);
   }
 }

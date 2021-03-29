@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../controllers/restaurante_controller.dart';
+import '../models/restauranteModel.dart';
 
 class ScorePage extends StatefulWidget {
   //User user;
@@ -9,9 +11,16 @@ class ScorePage extends StatefulWidget {
 }
 
 class _ScorePageState extends State<ScorePage> {
+  var controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = RestauranteController();
+  }
   @override
   Widget build(BuildContext context) {
-    int teste = 0;
+
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -25,7 +34,7 @@ class _ScorePageState extends State<ScorePage> {
               ),
               Tab(
                 icon: Icon(Icons.star_outlined),
-                text: 'Conquistas',
+                text: 'Descontos',
               ),
               /*Tab(
                 icon: Icon(Icons.star_outlined),
@@ -44,130 +53,35 @@ class _ScorePageState extends State<ScorePage> {
                   child: Image.asset('assets/images/score.png'),
                 ),
                 Text(
-                  'Seu score atual é de: 0.0', //${widget.user.score}
+                  'Sua pontuação atual é 0', //${widget.user.score}
                   style: TextStyle(fontSize: 24),
                 ),
               ],
             ),
             Container(
-              child: ListView(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Column(
-                        children: [
-                          if (teste == 0)
-                            Opacity(
-                              opacity: 0.25,
-                              child: Image.asset(
-                                'assets/images/score_5.png',
-                                width: 250,
-                              ),
-                            ),
-                          if (teste != 0)
-                            Image.asset(
-                              'assets/images/score_5.png',
-                              width: 250,
-                            ),
-                          Text("100 Pontos",
-                              style: TextStyle(
-                                  fontSize: 24, color: Colors.indigo)),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Column(
-                        children: [
-                          if (teste == 0)
-                            Opacity(
-                              opacity: 0.25,
-                              child: Image.asset(
-                                'assets/images/score_3.png',
-                                width: 130,
-                              ),
-                            ),
-                          if (teste != 0)
-                            Image.asset(
-                              'assets/images/score_3.png',
-                              width: 130,
-                            ),
-                          Text("25 Pontos",
-                              style: TextStyle(
-                                  fontSize: 20, color: Colors.indigo)),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          if (teste == 0)
-                            Opacity(
-                              opacity: 0.25,
-                              child: Image.asset(
-                                'assets/images/score_4.png',
-                                width: 130,
-                              ),
-                            ),
-                          if (teste != 0)
-                            Image.asset(
-                              'assets/images/score_4.png',
-                              width: 130,
-                            ),
-                          Text("50 Pontos",
-                              style: TextStyle(
-                                  fontSize: 20, color: Colors.indigo)),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Column(
-                        children: [
-                          if (teste == 0)
-                            Opacity(
-                              opacity: 0.25,
-                              child: Image.asset(
-                                'assets/images/score_1.jpg',
-                                width: 130,
-                              ),
-                            ),
-                          if (teste != 0)
-                            Image.asset(
-                              'assets/images/score_1.jpg',
-                              width: 130,
-                            ),
-                          Text("1 Ponto",
-                              style: TextStyle(
-                                  fontSize: 20, color: Colors.indigo)),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          if (teste == 0)
-                            Opacity(
-                              opacity: 0.25,
-                              child: Image.asset(
-                                'assets/images/score_2.jpg',
-                                width: 130,
-                              ),
-                            ),
-                          if (teste != 0)
-                            Image.asset(
-                              'assets/images/score_2.jpg',
-                              width: 130,
-                            ),
-                          Text("10 Pontos",
-                              style: TextStyle(
-                                  fontSize: 20, color: Colors.indigo)),
-                        ],
-                      ),
-                    ],
-                  )
-                ],
+              child: ListView.separated(
+                itemCount: controller.restaurantes.length,
+                separatorBuilder: (_, __) => Divider(),
+                itemBuilder: (BuildContext context, int i) {
+                  final List<RestauranteModel> lista = controller.restaurantes; // lista de restaurantes
+                  return ListTile(
+                    leading: Image.network(
+                      lista[i].foto,
+                      width: 65,
+                    ),
+                    title: Text(lista[i].nome),
+                    trailing: Text(
+                      '5%',
+                      style: TextStyle(
+                          color: Colors.green,
+                          fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),),
+                    onTap: () {
+                    },
+                  );
+                },
+                padding: EdgeInsets.all(16),
               ),
             )
           ],

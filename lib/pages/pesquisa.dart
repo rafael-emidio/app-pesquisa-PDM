@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../models/restauranteModel.dart';
-//import 'package:smooth_star_rating/smooth_star_rating.dart';
-import '../models/pesquisaModel.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+
+import '../models/restauranteModel.dart';
+import '../models/pesquisaModel.dart';
 
 class Pesquisa extends StatefulWidget {
   RestauranteModel restaurante;
@@ -16,6 +16,7 @@ class Pesquisa extends StatefulWidget {
 }
 
 class _PesquisaState extends State<Pesquisa> {
+
   final _r1 = TextEditingController();
   final _r2 = TextEditingController();
   final _r3 = TextEditingController();
@@ -30,6 +31,7 @@ class _PesquisaState extends State<Pesquisa> {
     super.initState();
   }
 
+  //método que transforma texto em inteiro, retorna null em caso de erro
   int inteiro(valor) {
     return int.tryParse(valor);
   }
@@ -50,45 +52,50 @@ class _PesquisaState extends State<Pesquisa> {
                   'De 1 a 5, como você classificaria a qualidade da comida?',
                   style: TextStyle(fontSize: 16)),
             ),
-            RatingBar.builder(
-              initialRating: 0,
-              itemCount: 5,
-              itemBuilder: (context, i) {
-                switch (i) {
-                  case 0:
-                    return Icon(
-                      Icons.sentiment_very_dissatisfied,
-                      color: Colors.red,
-                    );
-                  case 1:
-                    return Icon(
-                      Icons.sentiment_dissatisfied,
-                      color: Colors.redAccent,
-                    );
-                  case 2:
-                    return Icon(
-                      Icons.sentiment_neutral,
-                      color: Colors.amber,
-                    );
-                  case 3:
-                    return Icon(
-                      Icons.sentiment_satisfied,
-                      color: Colors.lightGreen,
-                    );
-                  case 4:
-                    return Icon(
-                      Icons.sentiment_very_satisfied,
-                      color: Colors.green,
-                    );
-                  default:
-                    return null;
-                }
-              },
-              onRatingUpdate: (rating) {
-                setState(() {
-                  _r1.text = rating.toString();
-                });
-              },
+            //Escala de avaliação de 1 a 5, onde faz a verificação em qual satisfação o usuário escolherá
+            //retornando um valor double é convertido em string
+            Row (
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                RatingBar.builder(
+                  initialRating: 0,
+                  itemCount: 5,
+                  itemBuilder: (context, i) {
+                    switch (i) {
+                      case 0:
+                        return Icon(
+                          Icons.sentiment_very_dissatisfied,
+                          color: Colors.red,
+                        );
+                      case 1:
+                        return Icon(
+                          Icons.sentiment_dissatisfied,
+                          color: Colors.redAccent,
+                        );
+                      case 2:
+                        return Icon(
+                          Icons.sentiment_neutral,
+                          color: Colors.amber,
+                        );
+                      case 3:
+                        return Icon(
+                          Icons.sentiment_satisfied,
+                          color: Colors.lightGreen,
+                        );
+                      case 4:
+                        return Icon(
+                          Icons.sentiment_very_satisfied,
+                          color: Colors.green,
+                        );
+                      default:
+                        return null;
+                    }
+                  },
+                  onRatingUpdate: (rating) {
+                    _r1.text = rating.toString();
+                  },
+                ),
+              ],
             ),
             Padding(
               padding: EdgeInsets.all(12.0),
@@ -96,43 +103,48 @@ class _PesquisaState extends State<Pesquisa> {
                   'De 1 a 5, como você classificaria a qualidade do atendimento?',
                   style: TextStyle(fontSize: 16)),
             ),
-            RatingBar.builder(
-              initialRating: 0,
-              itemCount: 5,
-              itemBuilder: (context, i) {
-                switch (i) {
-                  case 0:
-                    return Icon(
-                      Icons.sentiment_very_dissatisfied,
-                      color: Colors.red,
-                    );
-                  case 1:
-                    return Icon(
-                      Icons.sentiment_dissatisfied,
-                      color: Colors.redAccent,
-                    );
-                  case 2:
-                    return Icon(
-                      Icons.sentiment_neutral,
-                      color: Colors.amber,
-                    );
-                  case 3:
-                    return Icon(
-                      Icons.sentiment_satisfied,
-                      color: Colors.lightGreen,
-                    );
-                  case 4:
-                    return Icon(
-                      Icons.sentiment_very_satisfied,
-                      color: Colors.green,
-                    );
-                  default:
-                    return null;
-                }
-              },
-              onRatingUpdate: (rating) {
-                _r2.text = rating.toString();
-              },
+            Row (
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                RatingBar.builder(
+                  initialRating: 0,
+                  itemCount: 5,
+                  itemBuilder: (context, i) {
+                    switch (i) {
+                      case 0:
+                        return Icon(
+                          Icons.sentiment_very_dissatisfied,
+                          color: Colors.red,
+                        );
+                      case 1:
+                        return Icon(
+                          Icons.sentiment_dissatisfied,
+                          color: Colors.redAccent,
+                        );
+                      case 2:
+                        return Icon(
+                          Icons.sentiment_neutral,
+                          color: Colors.amber,
+                        );
+                      case 3:
+                        return Icon(
+                          Icons.sentiment_satisfied,
+                          color: Colors.lightGreen,
+                        );
+                      case 4:
+                        return Icon(
+                          Icons.sentiment_very_satisfied,
+                          color: Colors.green,
+                        );
+                      default:
+                        return null;
+                    }
+                  },
+                  onRatingUpdate: (rating) {
+                    _r2.text = rating.toString();
+                  },
+                ),
+              ],
             ),
             Padding(
               padding: EdgeInsets.all(12.0),
@@ -140,43 +152,48 @@ class _PesquisaState extends State<Pesquisa> {
                   'De 1 a 5, como você classificaria a velocidade do serviço?',
                   style: TextStyle(fontSize: 16)),
             ),
-            RatingBar.builder(
-              initialRating: 0,
-              itemCount: 5,
-              itemBuilder: (context, i) {
-                switch (i) {
-                  case 0:
-                    return Icon(
-                      Icons.sentiment_very_dissatisfied,
-                      color: Colors.red,
-                    );
-                  case 1:
-                    return Icon(
-                      Icons.sentiment_dissatisfied,
-                      color: Colors.redAccent,
-                    );
-                  case 2:
-                    return Icon(
-                      Icons.sentiment_neutral,
-                      color: Colors.amber,
-                    );
-                  case 3:
-                    return Icon(
-                      Icons.sentiment_satisfied,
-                      color: Colors.lightGreen,
-                    );
-                  case 4:
-                    return Icon(
-                      Icons.sentiment_very_satisfied,
-                      color: Colors.green,
-                    );
-                  default:
-                    return null;
-                }
-              },
-              onRatingUpdate: (rating) {
-                _r3.text = rating.toString();
-              },
+            Row (
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                RatingBar.builder(
+                  initialRating: 0,
+                  itemCount: 5,
+                  itemBuilder: (context, i) {
+                    switch (i) {
+                      case 0:
+                        return Icon(
+                          Icons.sentiment_very_dissatisfied,
+                          color: Colors.red,
+                        );
+                      case 1:
+                        return Icon(
+                          Icons.sentiment_dissatisfied,
+                          color: Colors.redAccent,
+                        );
+                      case 2:
+                        return Icon(
+                          Icons.sentiment_neutral,
+                          color: Colors.amber,
+                        );
+                      case 3:
+                        return Icon(
+                          Icons.sentiment_satisfied,
+                          color: Colors.lightGreen,
+                        );
+                      case 4:
+                        return Icon(
+                          Icons.sentiment_very_satisfied,
+                          color: Colors.green,
+                        );
+                      default:
+                        return null;
+                    }
+                  },
+                  onRatingUpdate: (rating) {
+                    _r3.text = rating.toString();
+                  },
+                ),
+              ],
             ),
             Padding(
               padding: EdgeInsets.all(12.0),
@@ -184,43 +201,48 @@ class _PesquisaState extends State<Pesquisa> {
                   'De 1 a 5, como você classificaria o custo benefício?',
                   style: TextStyle(fontSize: 16)),
             ),
-            RatingBar.builder(
-              initialRating: 0,
-              itemCount: 5,
-              itemBuilder: (context, i) {
-                switch (i) {
-                  case 0:
-                    return Icon(
-                      Icons.sentiment_very_dissatisfied,
-                      color: Colors.red,
-                    );
-                  case 1:
-                    return Icon(
-                      Icons.sentiment_dissatisfied,
-                      color: Colors.redAccent,
-                    );
-                  case 2:
-                    return Icon(
-                      Icons.sentiment_neutral,
-                      color: Colors.amber,
-                    );
-                  case 3:
-                    return Icon(
-                      Icons.sentiment_satisfied,
-                      color: Colors.lightGreen,
-                    );
-                  case 4:
-                    return Icon(
-                      Icons.sentiment_very_satisfied,
-                      color: Colors.green,
-                    );
-                  default:
-                    return null;
-                }
-              },
-              onRatingUpdate: (rating) {
-                _r4.text = rating.toString();
-              },
+            Row (
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                RatingBar.builder(
+                  initialRating: 0,
+                  itemCount: 5,
+                  itemBuilder: (context, i) {
+                    switch (i) {
+                      case 0:
+                        return Icon(
+                          Icons.sentiment_very_dissatisfied,
+                          color: Colors.red,
+                        );
+                      case 1:
+                        return Icon(
+                          Icons.sentiment_dissatisfied,
+                          color: Colors.redAccent,
+                        );
+                      case 2:
+                        return Icon(
+                          Icons.sentiment_neutral,
+                          color: Colors.amber,
+                        );
+                      case 3:
+                        return Icon(
+                          Icons.sentiment_satisfied,
+                          color: Colors.lightGreen,
+                        );
+                      case 4:
+                        return Icon(
+                          Icons.sentiment_very_satisfied,
+                          color: Colors.green,
+                        );
+                      default:
+                        return null;
+                    }
+                  },
+                  onRatingUpdate: (rating) {
+                    _r4.text = rating.toString();
+                  },
+                ),
+              ],
             ),
             Padding(
               padding: EdgeInsets.all(12.0),
@@ -228,44 +250,50 @@ class _PesquisaState extends State<Pesquisa> {
                   'De 1 a 5, qual a chance de você indicar esse restaurante pra algum amigo ou familiar?',
                   style: TextStyle(fontSize: 16)),
             ),
-            RatingBar.builder(
-              initialRating: 0,
-              itemCount: 5,
-              itemBuilder: (context, i) {
-                switch (i) {
-                  case 0:
-                    return Icon(
-                      Icons.sentiment_very_dissatisfied,
-                      color: Colors.red,
-                    );
-                  case 1:
-                    return Icon(
-                      Icons.sentiment_dissatisfied,
-                      color: Colors.redAccent,
-                    );
-                  case 2:
-                    return Icon(
-                      Icons.sentiment_neutral,
-                      color: Colors.amber,
-                    );
-                  case 3:
-                    return Icon(
-                      Icons.sentiment_satisfied,
-                      color: Colors.lightGreen,
-                    );
-                  case 4:
-                    return Icon(
-                      Icons.sentiment_very_satisfied,
-                      color: Colors.green,
-                    );
-                  default:
-                    return null;
-                }
-              },
-              onRatingUpdate: (rating) {
-                _r5.text = rating.toString();
-              },
+            Row (
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                RatingBar.builder(
+                  initialRating: 0,
+                  itemCount: 5,
+                  itemBuilder: (context, i) {
+                    switch (i) {
+                      case 0:
+                        return Icon(
+                          Icons.sentiment_very_dissatisfied,
+                          color: Colors.red,
+                        );
+                      case 1:
+                        return Icon(
+                          Icons.sentiment_dissatisfied,
+                          color: Colors.redAccent,
+                        );
+                      case 2:
+                        return Icon(
+                          Icons.sentiment_neutral,
+                          color: Colors.amber,
+                        );
+                      case 3:
+                        return Icon(
+                          Icons.sentiment_satisfied,
+                          color: Colors.lightGreen,
+                        );
+                      case 4:
+                        return Icon(
+                          Icons.sentiment_very_satisfied,
+                          color: Colors.green,
+                        );
+                      default:
+                        return null;
+                    }
+                  },
+                  onRatingUpdate: (rating) {
+                    _r5.text = rating.toString();
+                  },
+                ),
+              ],
             ),
+
             Padding(
               padding: EdgeInsets.all(12.0),
               child: Text('Gostaria de adicionar algum comentário? (Opicional)',
@@ -313,8 +341,8 @@ class _PesquisaState extends State<Pesquisa> {
                           inteiro(_r4.text),
                           inteiro(_r5.text),
                           _comentario.text);
+                      widget.onSave(this.pesquisa);
                     }
-                    showAlertDialog(context);
                   }
                 },
                 child: Row(
@@ -335,58 +363,26 @@ class _PesquisaState extends State<Pesquisa> {
     );
   }
 
-  showAlertDialog(BuildContext context) {
-    // configura o button
-    Widget concluido = TextButton(
-      child: ElevatedButton.icon(
-          onPressed: () {
-            widget.onSave(this.pesquisa);
-            Navigator.pop(context);
-          },
-          label: Text('Avaliação concluída'),
-          icon: Icon(Icons.check)),
-    );
-
-    // configura o  AlertDialog
-    AlertDialog alerta = AlertDialog(
-      actions: [
-        concluido,
-      ],
-    );
-    // exibe o dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alerta;
-      },
-    );
-  }
-
   error(BuildContext context) {
-    // configura o button
-    Widget faltante = TextButton(
-      child: ElevatedButton(
-        child: Text("OK"),
-        onPressed: () {
-          Navigator.of(context).pop(false);
-        },
-      ),
-    );
-
-    // configura o  AlertDialog
-    AlertDialog alerta = AlertDialog(
-      title: Text("Responda todas as perguntas de 1 a 5"),
-      content: Text("Escala em cinza quer dizer não preenchida."),
-      actions: [
-        faltante,
-      ],
-    );
     // exibe o dialog
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return alerta;
+        return AlertDialog(
+          title: Text("Responda todas as perguntas de 1 a 5"),
+          content: Text("Escala em cinza quer dizer não preenchida."),
+          actions: [
+            TextButton( // ignore: missing_required_param
+              child: ElevatedButton(
+                child: Text("OK"),
+                  onPressed: () {
+                  Navigator.of(context).pop(false);
+                },
+              ),
+            ),
+          ],
+        );
       },
-    );
+    ); // showDialog
   }
 }
