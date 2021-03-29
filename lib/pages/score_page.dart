@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 
 class ScorePage extends StatefulWidget {
   //User user;
@@ -12,6 +11,7 @@ class ScorePage extends StatefulWidget {
 class _ScorePageState extends State<ScorePage> {
   @override
   Widget build(BuildContext context) {
+    int teste = 0;
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -63,13 +63,19 @@ class _ScorePageState extends State<ScorePage> {
                     children: [
                       Column(
                         children: [
-                          Opacity(
-                            opacity: 0.25,
-                            child: Image.asset(
+                          if (teste == 0)
+                            Opacity(
+                              opacity: 0.25,
+                              child: Image.asset(
+                                'assets/images/score_5.png',
+                                width: 250,
+                              ),
+                            ),
+                          if (teste != 0)
+                            Image.asset(
                               'assets/images/score_5.png',
                               width: 250,
                             ),
-                          ),
                           Text("100 Pontos",
                               style: TextStyle(
                                   fontSize: 24, color: Colors.red[700])),
@@ -82,13 +88,19 @@ class _ScorePageState extends State<ScorePage> {
                     children: [
                       Column(
                         children: [
-                          Opacity(
-                            opacity: 0.25,
-                            child: Image.asset(
+                          if (teste == 0)
+                            Opacity(
+                              opacity: 0.25,
+                              child: Image.asset(
+                                'assets/images/score_3.png',
+                                width: 130,
+                              ),
+                            ),
+                          if (teste != 0)
+                            Image.asset(
                               'assets/images/score_3.png',
                               width: 130,
                             ),
-                          ),
                           Text("25 Pontos",
                               style: TextStyle(
                                   fontSize: 20, color: Colors.red[700])),
@@ -96,13 +108,19 @@ class _ScorePageState extends State<ScorePage> {
                       ),
                       Column(
                         children: [
-                          Opacity(
-                            opacity: 0.25,
-                            child: Image.asset(
+                          if (teste == 0)
+                            Opacity(
+                              opacity: 0.25,
+                              child: Image.asset(
+                                'assets/images/score_4.png',
+                                width: 130,
+                              ),
+                            ),
+                          if (teste != 0)
+                            Image.asset(
                               'assets/images/score_4.png',
                               width: 130,
                             ),
-                          ),
                           Text("50 Pontos",
                               style: TextStyle(
                                   fontSize: 20, color: Colors.red[700])),
@@ -115,13 +133,19 @@ class _ScorePageState extends State<ScorePage> {
                     children: [
                       Column(
                         children: [
-                          Opacity(
-                            opacity: 0.25,
-                            child: Image.asset(
+                          if (teste == 0)
+                            Opacity(
+                              opacity: 0.25,
+                              child: Image.asset(
+                                'assets/images/score_1.jpg',
+                                width: 130,
+                              ),
+                            ),
+                          if (teste != 0)
+                            Image.asset(
                               'assets/images/score_1.jpg',
                               width: 130,
                             ),
-                          ),
                           Text("1 Ponto",
                               style: TextStyle(
                                   fontSize: 20, color: Colors.red[700])),
@@ -129,13 +153,19 @@ class _ScorePageState extends State<ScorePage> {
                       ),
                       Column(
                         children: [
-                          Opacity(
-                            opacity: 0.25,
-                            child: Image.asset(
+                          if (teste == 0)
+                            Opacity(
+                              opacity: 0.25,
+                              child: Image.asset(
+                                'assets/images/score_2.jpg',
+                                width: 130,
+                              ),
+                            ),
+                          if (teste != 0)
+                            Image.asset(
                               'assets/images/score_2.jpg',
                               width: 130,
                             ),
-                          ),
                           Text("10 Pontos",
                               style: TextStyle(
                                   fontSize: 20, color: Colors.red[700])),
