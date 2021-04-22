@@ -18,29 +18,31 @@ class Cadastro extends StatelessWidget {
           child: Column(
             children: <Widget>[
               TextFormField(
-                  decoration: InputDecoration(labelText: 'Nome:'),
-                  keyboardType: TextInputType.text,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Preencha com seu nome';
-                    }
-                    return null;
-                  },
-                  onSaved: (value) {
-                    print(value);
-                  }),
+                decoration: InputDecoration(labelText: 'Nome:'),
+                keyboardType: TextInputType.text,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Preencha com seu nome';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  print(value);
+                },
+              ),
               TextFormField(
-                  decoration: InputDecoration(labelText: 'E-mail:'),
-                  keyboardType: TextInputType.emailAddress,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Preencha com seu e-mail';
-                    }
-                    return null;
-                  },
-                  onSaved: (value) {
-                    print(value);
-                  }),
+                decoration: InputDecoration(labelText: 'E-mail:'),
+                keyboardType: TextInputType.emailAddress,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Preencha com seu e-mail';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  print(value);
+                },
+              ),
               TextFormField(
                   obscureText: true,
                   decoration: InputDecoration(labelText: 'Senha:'),
