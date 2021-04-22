@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'pagina_inicial.dart';
-import 'cadastro.dart';
+import 'cadastroUsuario.dart';
+import 'cadastroEstabelecimento.dart';
 
 class LoginPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -130,7 +131,25 @@ class LoginPage extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (BuildContext context) =>
-                                Cadastro() // redireciona para página inicial
+                                CadastroUsuario() // redireciona para página inicial
+                            ));
+                  },
+                ),
+              ),
+              Container(
+                height: 30,
+                alignment: Alignment.center,
+                child: FlatButton(
+                  child: Text(
+                    "Cadastrar Estabelecimento",
+                    style: TextStyle(color: Colors.indigo, fontSize: 16),
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                CadastroEstabelecimento() // redireciona para página inicial
                             ));
                   },
                 ),

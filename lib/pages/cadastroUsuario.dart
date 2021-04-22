@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'login.dart';
 
-class Cadastro extends StatelessWidget {
+class CadastroUsuario extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -48,7 +48,7 @@ class Cadastro extends StatelessWidget {
                   decoration: InputDecoration(labelText: 'Senha:'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Insira sua senha';
+                      return 'Insira uma senha';
                     }
                     return null;
                   },
