@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './pages/pagina_inicial.dart';
+import './pages/login.dart';
 
 void main() {
   runApp(AppPesquisa());
@@ -17,7 +18,7 @@ class AppPesquisa extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         brightness: Brightness.light,
       ),
-      home: PaginaInicial(),
+      home: LoginPage(),
     );
   }
 }

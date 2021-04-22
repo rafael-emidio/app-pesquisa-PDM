@@ -16,7 +16,6 @@ class Pesquisa extends StatefulWidget {
 }
 
 class _PesquisaState extends State<Pesquisa> {
-
   final _r1 = TextEditingController();
   final _r2 = TextEditingController();
   final _r3 = TextEditingController();
@@ -54,7 +53,7 @@ class _PesquisaState extends State<Pesquisa> {
             ),
             //Escala de avaliação de 1 a 5, onde faz a verificação em qual satisfação o usuário escolherá
             //retornando um valor double é convertido em string
-            Row (
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 RatingBar.builder(
@@ -103,7 +102,7 @@ class _PesquisaState extends State<Pesquisa> {
                   'De 1 a 5, como você classificaria a qualidade do atendimento?',
                   style: TextStyle(fontSize: 16)),
             ),
-            Row (
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 RatingBar.builder(
@@ -152,7 +151,7 @@ class _PesquisaState extends State<Pesquisa> {
                   'De 1 a 5, como você classificaria a velocidade do serviço?',
                   style: TextStyle(fontSize: 16)),
             ),
-            Row (
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 RatingBar.builder(
@@ -201,7 +200,7 @@ class _PesquisaState extends State<Pesquisa> {
                   'De 1 a 5, como você classificaria o custo benefício?',
                   style: TextStyle(fontSize: 16)),
             ),
-            Row (
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 RatingBar.builder(
@@ -250,7 +249,7 @@ class _PesquisaState extends State<Pesquisa> {
                   'De 1 a 5, qual a chance de você indicar esse restaurante pra algum amigo ou familiar?',
                   style: TextStyle(fontSize: 16)),
             ),
-            Row (
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 RatingBar.builder(
@@ -372,10 +371,11 @@ class _PesquisaState extends State<Pesquisa> {
           title: Text("Responda todas as perguntas de 1 a 5"),
           content: Text("Escala em cinza quer dizer não preenchida."),
           actions: [
-            TextButton( // ignore: missing_required_param
+            TextButton(
+              // ignore: missing_required_param
               child: ElevatedButton(
                 child: Text("OK"),
-                  onPressed: () {
+                onPressed: () {
                   Navigator.of(context).pop(false);
                 },
               ),

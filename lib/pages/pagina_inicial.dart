@@ -5,6 +5,7 @@ import '../models/restauranteModel.dart';
 import '../models/pesquisaModel.dart';
 import 'pesquisa.dart';
 import 'score_page.dart';
+import 'login.dart';
 
 class PaginaInicial extends StatefulWidget {
   @override
@@ -19,16 +20,13 @@ class _PaginaInicialState extends State<PaginaInicial> {
     super.initState();
     controller = RestauranteController();
   }
+
   // retorno do método onSave, volta para página inicial e mostra mensagem
   salvarPesquisa(PesquisaModel pesquisa) {
     Navigator.pop(context);
-    ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Obrigado por avaliar! sua resposta será salva.',
-              style: TextStyle(fontSize: 16)
-          )
-        )
-    );
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Obrigado por avaliar! sua resposta será salva.',
+            style: TextStyle(fontSize: 16))));
   }
 
   @override
@@ -43,9 +41,9 @@ class _PaginaInicialState extends State<PaginaInicial> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (BuildContext context) => ScorePage() // redireciona para página de pontuação do usuário
-                      )
-                  );
+                          builder: (BuildContext context) =>
+                              ScorePage() // redireciona para página de pontuação do usuário
+                          ));
                 })
           ],
         ),
@@ -53,7 +51,8 @@ class _PaginaInicialState extends State<PaginaInicial> {
           itemCount: controller.restaurantes.length,
           separatorBuilder: (_, __) => Divider(),
           itemBuilder: (BuildContext context, int i) {
-            final List<RestauranteModel> lista = controller.restaurantes; // lista de restaurantes
+            final List<RestauranteModel> lista =
+                controller.restaurantes; // lista de restaurantes
             return ListTile(
               leading: Image.network(
                 lista[i].foto,
@@ -61,27 +60,28 @@ class _PaginaInicialState extends State<PaginaInicial> {
               ),
               title: Text(lista[i].nome),
               trailing: Text(
-                // se não houver média escreve "sem média"
+                  // se não houver média escreve "sem média"
                   lista[i].media.toString() == null
-                  ? lista[i].media.toString()
-                  : 'Sem média'
-              ),
+                      ? lista[i].media.toString()
+                      : 'Sem média'),
               //ao pressionar redireciona para a pagina de pesquisa referenciando o restaurante
               onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (_) => Pesquisa(
-                          key: Key(lista[i].id.toString()), //id do restaurante como chave
+                          key: Key(lista[i]
+                              .id
+                              .toString()), //id do restaurante como chave
                           restaurante: lista[i], // restaurante em si
-                          onSave: this.salvarPesquisa // método onSave retorna para página inicial ao concluir pesquisa
-                      ),
+                          onSave: this
+                              .salvarPesquisa // método onSave retorna para página inicial ao concluir pesquisa
+                          ),
                     ));
               },
             );
           },
           padding: EdgeInsets.all(16),
-        )
-    );
+        ));
   }
 }

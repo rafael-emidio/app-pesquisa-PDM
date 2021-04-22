@@ -18,9 +18,9 @@ class _ScorePageState extends State<ScorePage> {
     super.initState();
     controller = RestauranteController();
   }
+
   @override
   Widget build(BuildContext context) {
-
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -36,10 +36,6 @@ class _ScorePageState extends State<ScorePage> {
                 icon: Icon(Icons.star_outlined),
                 text: 'Descontos',
               ),
-              /*Tab(
-                icon: Icon(Icons.star_outlined),
-                text: 'Histórico',
-              )*/
             ],
           ),
         ),
@@ -63,7 +59,8 @@ class _ScorePageState extends State<ScorePage> {
                 itemCount: controller.restaurantes.length,
                 separatorBuilder: (_, __) => Divider(),
                 itemBuilder: (BuildContext context, int i) {
-                  final List<RestauranteModel> lista = controller.restaurantes; // lista de restaurantes
+                  final List<RestauranteModel> lista =
+                      controller.restaurantes; // lista de restaurantes
                   return ListTile(
                     leading: Image.network(
                       lista[i].foto,
@@ -73,12 +70,12 @@ class _ScorePageState extends State<ScorePage> {
                     trailing: Text(
                       '5%',
                       style: TextStyle(
-                          color: Colors.green,
-                          fontSize: 20,
+                        color: Colors.green,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
-                      ),),
-                    onTap: () {
-                    },
+                      ),
+                    ),
+                    onTap: () {},
                   );
                 },
                 padding: EdgeInsets.all(16),
