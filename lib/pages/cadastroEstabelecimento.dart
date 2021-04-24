@@ -49,7 +49,7 @@ class CadastroEstabelecimento extends StatelessWidget {
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Preencha com um e-mail';
+                    return 'Preencha com um e-mail para contato';
                   }
                   return null;
                 },
@@ -57,7 +57,7 @@ class CadastroEstabelecimento extends StatelessWidget {
                   print(value);
                 },
               ),
-              TextFormField(
+              /*TextFormField(
                   obscureText: true,
                   decoration: InputDecoration(labelText: 'Senha:'),
                   validator: (value) {
@@ -68,7 +68,7 @@ class CadastroEstabelecimento extends StatelessWidget {
                   },
                   onSaved: (value) {
                     print(value);
-                  }),
+                  }),*/
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

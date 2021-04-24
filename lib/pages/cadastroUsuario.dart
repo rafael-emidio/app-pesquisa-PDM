@@ -55,6 +55,22 @@ class CadastroUsuario extends StatelessWidget {
                   onSaved: (value) {
                     print(value);
                   }),
+              TextFormField(
+                  obscureText: true,
+                  decoration: InputDecoration(labelText: 'Confirme a senha:'),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Confirme a senha';
+                    }
+                    return null;
+                    /*if (value == null || value.isEmpty) {
+                      return 'As senha não coincidem, tente novamente';
+                    }
+                    return null;*/
+                  },
+                  onSaved: (value) {
+                    print(value);
+                  }),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

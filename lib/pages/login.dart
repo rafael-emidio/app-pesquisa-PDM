@@ -100,7 +100,7 @@ class LoginPage extends StatelessWidget {
                   }
                 },
               ),
-              RaisedButton(
+              /*RaisedButton(
                 color: Colors.indigo,
                 child: const Text('Entrar como Estabelecimento'),
                 textColor: Colors.white,
@@ -117,7 +117,7 @@ class LoginPage extends StatelessWidget {
                     );
                   }
                 },
-              ),
+              ),*/
               Container(
                 height: 30,
                 alignment: Alignment.center,
@@ -141,7 +141,7 @@ class LoginPage extends StatelessWidget {
                 alignment: Alignment.center,
                 child: FlatButton(
                   child: Text(
-                    "Cadastrar Estabelecimento",
+                    "Solicitar Cadastro de Estabelecimento",
                     style: TextStyle(color: Colors.indigo, fontSize: 16),
                   ),
                   onPressed: () {
