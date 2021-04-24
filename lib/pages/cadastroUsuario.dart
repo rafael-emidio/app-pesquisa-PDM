@@ -3,12 +3,13 @@ import 'package:get/get.dart';
 import 'login.dart';
 import '../models/usuarioModel.dart';
 
-class CadastroUsuario extends StatelessWidget {
-  UsuarioModel usuario;
+class CadastroUsuario extends StatefulWidget {
+  @override
+  _CadastroUsuario createState() => _CadastroUsuario();
+}
+
+class _CadastroUsuario extends State<CadastroUsuario> {
   final _formKey = GlobalKey<FormState>();
-
-  //CadastroUsuario({Key key, this.usuario, this.onSave}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
