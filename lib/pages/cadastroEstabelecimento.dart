@@ -32,6 +32,19 @@ class CadastroEstabelecimento extends StatelessWidget {
                 },
               ),
               TextFormField(
+                decoration: InputDecoration(labelText: 'CNPJ:'),
+                keyboardType: TextInputType.emailAddress,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Preencha com o CNPJ do estabelecimento';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  print(value);
+                },
+              ),
+              TextFormField(
                 decoration: InputDecoration(labelText: 'Url da logo:'),
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) {

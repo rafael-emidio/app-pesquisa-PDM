@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'login.dart';
+import '../models/usuarioModel.dart';
 
 class CadastroUsuario extends StatelessWidget {
+  UsuarioModel usuario;
   final _formKey = GlobalKey<FormState>();
+
+  //CadastroUsuario({Key key, this.usuario, this.onSave}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

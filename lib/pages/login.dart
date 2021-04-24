@@ -112,7 +112,7 @@ class LoginPage extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (BuildContext context) =>
-                            PaginaInicial(), // redireciona para página de login
+                            PaginaInicial(), // redireciona para página inicial
                       ),
                     );
                   }
@@ -128,11 +128,12 @@ class LoginPage extends StatelessWidget {
                   ),
                   onPressed: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                CadastroUsuario() // redireciona para página inicial
-                            ));
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              CadastroUsuario() // redireciona para página de cadastro
+                          ),
+                    );
                   },
                 ),
               ),
@@ -146,11 +147,12 @@ class LoginPage extends StatelessWidget {
                   ),
                   onPressed: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                CadastroEstabelecimento() // redireciona para página inicial
-                            ));
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              CadastroEstabelecimento() // redireciona para página de cadastro de estabelecimento
+                          ),
+                    );
                   },
                 ),
               ),
