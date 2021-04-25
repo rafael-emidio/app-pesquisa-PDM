@@ -1,8 +1,21 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'login.dart';
+import '../models/cadEstabelecimentoModel.dart';
 
-class CadastroEstabelecimento extends StatelessWidget {
+class CadastroEstabelecimento extends StatefulWidget {
+  @override
+  _CadastroEstabelecimento createState() => _CadastroEstabelecimento();
+}
+
+class _CadastroEstabelecimento extends State<CadastroEstabelecimento> {
+  TextEditingController _nomeInputController = TextEditingController();
+  TextEditingController _cnpjInputController = TextEditingController();
+  TextEditingController _urlInputController = TextEditingController();
+  TextEditingController _emailInputController = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -18,70 +31,62 @@ class CadastroEstabelecimento extends StatelessWidget {
           child: Column(
             children: <Widget>[
               TextFormField(
+                controller: _nomeInputController,
                 decoration:
                     InputDecoration(labelText: 'Nome do Estabelecimento:'),
                 keyboardType: TextInputType.text,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
+                validator: (_nomeInputController) {
+                  if (_nomeInputController == null ||
+                      _nomeInputController.isEmpty) {
                     return 'Preencha o nome do Restaurante';
                   }
                   return null;
                 },
-                onSaved: (value) {
-                  print(value);
-                },
               ),
               TextFormField(
+                controller: _cnpjInputController,
                 decoration: InputDecoration(labelText: 'CNPJ:'),
-                keyboardType: TextInputType.emailAddress,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
+                keyboardType: TextInputType.number,
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                  CnpjInputFormatter(),
+                ],
+                validator: (_cnpjInputController) {
+                  if (_cnpjInputController == null ||
+                      _cnpjInputController.isEmpty) {
                     return 'Preencha com o CNPJ do estabelecimento';
                   }
-                  return null;
-                },
-                onSaved: (value) {
-                  print(value);
+                  if (GetUtils.isCnpj(_cnpjInputController)) {
+                    return null;
+                  } else {
+                    return 'CNPJ inválido';
+                  }
                 },
               ),
               TextFormField(
+                controller: _urlInputController,
                 decoration: InputDecoration(labelText: 'Url da logo:'),
-                keyboardType: TextInputType.emailAddress,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
+                keyboardType: TextInputType.text,
+                validator: (_urlInputController) {
+                  if (_urlInputController == null ||
+                      _urlInputController.isEmpty) {
                     return 'Preencha com a Url da logo de seu Restaurante';
                   }
                   return null;
                 },
-                onSaved: (value) {
-                  print(value);
-                },
               ),
               TextFormField(
+                controller: _emailInputController,
                 decoration: InputDecoration(labelText: 'E-mail:'),
                 keyboardType: TextInputType.emailAddress,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
+                validator: (_emailInputController) {
+                  if (_emailInputController == null ||
+                      _emailInputController.isEmpty) {
                     return 'Preencha com um e-mail para contato';
                   }
                   return null;
                 },
-                onSaved: (value) {
-                  print(value);
-                },
               ),
-              /*TextFormField(
-                  obscureText: true,
-                  decoration: InputDecoration(labelText: 'Senha:'),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Insira uma senha';
-                    }
-                    return null;
-                  },
-                  onSaved: (value) {
-                    print(value);
-                  }),*/
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -96,6 +101,7 @@ class CadastroEstabelecimento extends StatelessWidget {
                     onPressed: () {
                       final isValid = _formKey.currentState.validate();
                       if (isValid) {
+                        _gravar();
                         _formKey.currentState.save();
                         Navigator.push(
                           context,
@@ -114,5 +120,15 @@ class CadastroEstabelecimento extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _gravar() {
+    CadEstabelecimentoModel novoEstabelecimento = CadEstabelecimentoModel(
+      nome: _nomeInputController.text,
+      cnpj: _cnpjInputController.text,
+      url: _urlInputController.text,
+      email: _emailInputController.text,
+    );
+    print(novoEstabelecimento); //apenas para printar, retirar depois
   }
 }

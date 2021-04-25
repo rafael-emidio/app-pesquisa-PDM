@@ -46,6 +46,7 @@ class LoginPage extends StatelessWidget {
                   }
                   return null;
                 },
+                // apenas printando o valor, retirar futuramente
                 onSaved: (value) {
                   print(value);
                 },
@@ -67,6 +68,7 @@ class LoginPage extends StatelessWidget {
                   }
                   return null;
                 },
+                // apenas printando o valor, retirar futuramente
                 onSaved: (value) {
                   print(value);
                 },
@@ -100,24 +102,6 @@ class LoginPage extends StatelessWidget {
                   }
                 },
               ),
-              /*RaisedButton(
-                color: Colors.indigo,
-                child: const Text('Entrar como Estabelecimento'),
-                textColor: Colors.white,
-                onPressed: () {
-                  final isValid = _formKey.currentState.validate();
-                  if (isValid) {
-                    _formKey.currentState.save();
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            PaginaInicial(), // redireciona para página inicial
-                      ),
-                    );
-                  }
-                },
-              ),*/
               Container(
                 height: 30,
                 alignment: Alignment.center,
