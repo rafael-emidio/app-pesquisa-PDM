@@ -30,14 +30,15 @@ class RestaurantesRep {
   }
 
   RestaurantesRep() {
-    _restaurantes.addAll([
-      RestauranteModel(
-        id: '1',
-        email: 'Restaurante elite',
-        nome: 'teste',
-        proprietario: 'prop',
-        url: 'https://restauranteelite.com.br/wp-content/uploads/2016/05/logoeliteblue.png',
-      ),
-    ]);
+    //_restaurantes.addAll([
+    //  RestauranteModel(
+    //    id: '1',
+    //    email: 'Restaurante elite',
+    //    nome: 'teste',
+    //    proprietario: 'prop',
+     //   url: 'https://restauranteelite.com.br/wp-content/uploads/2016/05/logoeliteblue.png',
+     // ),
+    //]);
+    this.getRestaurantes();
   }
 }

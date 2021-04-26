@@ -51,7 +51,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text(AuthService.to.user.email)),
+        appBar: AppBar(title: Text('Bem vindo a pesquisa')),
         bottomNavigationBar: BottomNavigationBar(
           items: [
             BottomNavigationBarItem(
@@ -64,7 +64,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.account_circle),
-              label: "Perfil",
+              label: "logout",
             ),
           ],
           currentIndex: _selectedIndex,
