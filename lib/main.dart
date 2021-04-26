@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:get/get.dart';
+import './services/auth_service.dart';
 import './pages/pagina_inicial.dart';
 import './pages/login.dart';
+import './pages/checkauth.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  Get.lazyPut<AuthService>(()=> AuthService());
+
   runApp(AppPesquisa());
 }
 
@@ -18,7 +26,7 @@ class AppPesquisa extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         brightness: Brightness.light,
       ),
-      home: LoginPage(),
+      home: CheckAuth(),
     );
   }
 }

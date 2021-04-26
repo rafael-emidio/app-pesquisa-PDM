@@ -1,7 +1,9 @@
+import 'package:app_pesquisa_pdm/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'login.dart';
 import '../models/usuarioModel.dart';
+import 'checkauth.dart';
 
 class CadastroUsuario extends StatefulWidget {
   @override
@@ -66,6 +68,9 @@ class _CadastroUsuario extends State<CadastroUsuario> {
                         _senhaInputController.isEmpty) {
                       return 'Insira uma senha';
                     }
+                    if (_senhaInputController.length < 6) {
+                      return 'Insira uma senha com no mínimo 6 caracteres';
+                    }
                     return null;
                   }
                   /*onSaved: (value) {
@@ -107,11 +112,11 @@ class _CadastroUsuario extends State<CadastroUsuario> {
                       if (isValid) {
                         _gravar();
                         _formKey.currentState.save();
-                        Navigator.push(
+                        Navigator.pop(
                           context,
                           MaterialPageRoute(
                             builder: (BuildContext context) =>
-                                LoginPage(), // redireciona para página de login
+                                CheckAuth(), // redireciona para página de login
                           ),
                         );
                       }
@@ -134,5 +139,6 @@ class _CadastroUsuario extends State<CadastroUsuario> {
       _confirmaSenhaInputController.text,
     );
     print(novoUsuario); //apenas para printar, retirar depois
+    AuthService.to.criarUsuario(_emailInputController.text, _senhaInputController.text);
   }
 }

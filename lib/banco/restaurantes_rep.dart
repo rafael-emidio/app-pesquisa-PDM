@@ -1,9 +1,13 @@
 import '../models/restauranteModel.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'db_firestore.dart';
 
 class RestaurantesRep {
   final List<RestauranteModel> _restaurantes = [];
 
   get restaurantes => this._restaurantes;
+
+  FirebaseFirestore db = DBFirestore.get();
 
   RestaurantesRep() {
     _restaurantes.addAll([

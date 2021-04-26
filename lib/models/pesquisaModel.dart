@@ -1,7 +1,7 @@
 class PesquisaModel {
-  int id;
-  int iduser;
-  int idrestaurante;
+  String id;
+  String iduser;
+  String idrestaurante;
   int r1;
   int r2;
   int r3;

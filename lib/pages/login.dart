@@ -5,6 +5,7 @@ import 'cadastroUsuario.dart';
 import 'cadastroEstabelecimento.dart';
 import 'dart:core';
 import 'package:flutter/cupertino.dart';
+import '../services/auth_service.dart';
 
 class LoginPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -91,9 +92,8 @@ class LoginPage extends StatelessWidget {
                 onPressed: () {
                   final isValid = _formKey.currentState.validate();
                   if (isValid) {
-                    listUsuario(_email.text, _senha.text);
-                    var validadeUsuario = listUsuario(_email.text, _senha.text);
-                    if (validadeUsuario == true) {
+                    AuthService.to.login(_email.text, _senha.text);
+                    if (AuthService.to.usuarioAutenticado.value == true) {
                       _formKey.currentState.save();
                       Navigator.push(
                         context,
@@ -102,8 +102,6 @@ class LoginPage extends StatelessWidget {
                               PaginaInicial(), // redireciona para página de login
                         ),
                       );
-                    } else {
-                      error(context);
                     }
                   }
                 },

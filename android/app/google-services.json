@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "829972701818",
+    "project_id": "app-pesquisa-pdm",
+    "storage_bucket": "app-pesquisa-pdm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:829972701818:android:5d51fced362de11be151c3",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "829972701818-rji6rf05oq9e5u4u496l7qa3sm5jc7jo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHTfumFtuB2fHgjTf5TTG87iFJXhBWaCw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "829972701818-rji6rf05oq9e5u4u496l7qa3sm5jc7jo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

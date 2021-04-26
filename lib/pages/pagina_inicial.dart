@@ -1,3 +1,4 @@
+import 'package:app_pesquisa_pdm/services/auth_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../controllers/restaurante_controller.dart';
@@ -33,7 +34,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Pesquisa de satisfação'),
+          title: Text(AuthService.to.user.email),
           actions: [
             IconButton(
                 icon: Icon(Icons.star),
@@ -42,7 +43,8 @@ class _PaginaInicialState extends State<PaginaInicial> {
                       context,
                       MaterialPageRoute(
                           builder: (BuildContext context) =>
-                              ScorePage() // redireciona para página de pontuação do usuário
+                              ScorePage()
+                        // redireciona para página de pontuação do usuário
                           ));
                 })
           ],

@@ -1,3 +1,4 @@
+import 'package:app_pesquisa_pdm/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import '../controllers/restaurante_controller.dart';
 import '../models/restauranteModel.dart';
@@ -17,6 +18,8 @@ class _ScorePageState extends State<ScorePage> {
   void initState() {
     super.initState();
     controller = RestauranteController();
+    Navigator.pop(context);
+    AuthService.to.logout();
   }
 
   @override

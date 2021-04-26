@@ -331,9 +331,9 @@ class _PesquisaState extends State<Pesquisa> {
                   } else {
                     if (_formKey.currentState.validate()) {
                       this.pesquisa = PesquisaModel(
-                          1,
-                          1,
-                          widget.restaurante.id,
+                          '1',
+                          '1',
+                          widget.restaurante.id.toString(),
                           inteiro(_r1.text),
                           inteiro(_r2.text),
                           inteiro(_r3.text),
