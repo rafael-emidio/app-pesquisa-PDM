@@ -1,8 +1,9 @@
 class RestauranteModel {
-  int id;
-  String foto;
+  String id;
+  String email;
   String nome;
-  double media;
+  String proprietario;
+  String url;
 
-  RestauranteModel(this.id, this.foto, this.nome);
+  RestauranteModel({this.id, this.email, this.nome, this.proprietario, this.url});
 }

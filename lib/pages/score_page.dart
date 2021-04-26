@@ -18,8 +18,6 @@ class _ScorePageState extends State<ScorePage> {
   void initState() {
     super.initState();
     controller = RestauranteController();
-    Navigator.pop(context);
-    AuthService.to.logout();
   }
 
   @override
@@ -66,7 +64,7 @@ class _ScorePageState extends State<ScorePage> {
                       controller.restaurantes; // lista de restaurantes
                   return ListTile(
                     leading: Image.network(
-                      lista[i].foto,
+                      lista[i].url,
                       width: 65,
                     ),
                     title: Text(lista[i].nome),

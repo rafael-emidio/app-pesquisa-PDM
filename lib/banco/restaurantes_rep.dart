@@ -1,32 +1,43 @@
+import 'package:flutter/material.dart';
+
 import '../models/restauranteModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'db_firestore.dart';
 
 class RestaurantesRep {
-  final List<RestauranteModel> _restaurantes = [];
+  List<RestauranteModel> _restaurantes = [];
 
   get restaurantes => this._restaurantes;
 
-  FirebaseFirestore db = DBFirestore.get();
+
+  getRestaurantes() async {
+    FirebaseFirestore db = await DBFirestore.get();
+    var snapshot = await db.collection('restaurantes').get();
+
+    snapshot.docs.forEach((doc) {
+      final data = doc.data();
+      _restaurantes.add(
+          RestauranteModel(
+              id: doc.id,
+              email: data['email'],
+              nome: data['nome'],
+              proprietario: data['proprietario'],
+              url: data['url'],
+          )
+      );
+    });
+    return _restaurantes;
+  }
 
   RestaurantesRep() {
     _restaurantes.addAll([
       RestauranteModel(
-          1,
-          'https://restauranteelite.com.br/wp-content/uploads/2016/05/logoeliteblue.png',
-          'Restaurante Elite'),
-      RestauranteModel(
-          2,
-          'https://chiquinho.com.br/static/media/logo-chq-250-250.5e86ef55.png',
-          'Chiquinho sorvetes'),
-      RestauranteModel(
-          3,
-          'https://d25dk4h1q4vl9b.cloudfront.net/bundles/front/media/images/header/mcdonalds-logo.png',
-          'McDonalds'),
-      RestauranteModel(
-          4,
-          'https://finistore.vteximg.com.br/arquivos/ids/160931/new-logo.png?v=637413261489530000',
-          'Fini'),
+        id: '1',
+        email: 'Restaurante elite',
+        nome: 'teste',
+        proprietario: 'prop',
+        url: 'https://restauranteelite.com.br/wp-content/uploads/2016/05/logoeliteblue.png',
+      ),
     ]);
   }
 }

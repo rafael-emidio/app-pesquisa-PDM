@@ -1,4 +1,3 @@
-import 'package:app_pesquisa_pdm/services/auth_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../controllers/restaurante_controller.dart';
@@ -7,6 +6,7 @@ import '../models/pesquisaModel.dart';
 import 'pesquisa.dart';
 import 'score_page.dart';
 import 'login.dart';
+import '../services/auth_service.dart';
 
 class PaginaInicial extends StatefulWidget {
   @override
@@ -15,7 +15,7 @@ class PaginaInicial extends StatefulWidget {
 
 class _PaginaInicialState extends State<PaginaInicial> {
   var controller;
-
+  int _selectedIndex = 0;
   @override
   void initState() {
     super.initState();
@@ -30,24 +30,45 @@ class _PaginaInicialState extends State<PaginaInicial> {
             style: TextStyle(fontSize: 16))));
   }
 
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+      print(_selectedIndex);
+      if (_selectedIndex == 0) {
+      } else if (_selectedIndex == 1) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (BuildContext context) =>
+                    ScorePage() // redireciona para página de pontuação do usuário
+            ));
+      } else if (_selectedIndex == 2) {
+        AuthService.to.logout();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(AuthService.to.user.email),
-          actions: [
-            IconButton(
-                icon: Icon(Icons.star),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              ScorePage()
-                        // redireciona para página de pontuação do usuário
-                          ));
-                })
+        appBar: AppBar(title: Text(AuthService.to.user.email)),
+        bottomNavigationBar: BottomNavigationBar(
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: "Pagina inicial",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.star),
+              label: "Pontuação",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle),
+              label: "Perfil",
+            ),
           ],
+          currentIndex: _selectedIndex,
+          onTap: _onItemTapped,
         ),
         body: ListView.separated(
           itemCount: controller.restaurantes.length,
@@ -57,15 +78,11 @@ class _PaginaInicialState extends State<PaginaInicial> {
                 controller.restaurantes; // lista de restaurantes
             return ListTile(
               leading: Image.network(
-                lista[i].foto,
+                lista[i].url,
                 width: 65,
               ),
               title: Text(lista[i].nome),
-              trailing: Text(
-                  // se não houver média escreve "sem média"
-                  lista[i].media.toString() == null
-                      ? lista[i].media.toString()
-                      : 'Sem média'),
+              trailing: Text('Sem média'),
               //ao pressionar redireciona para a pagina de pesquisa referenciando o restaurante
               onTap: () {
                 Navigator.push(
@@ -78,7 +95,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
                           restaurante: lista[i], // restaurante em si
                           onSave: this
                               .salvarPesquisa // método onSave retorna para página inicial ao concluir pesquisa
-                          ),
+                      ),
                     ));
               },
             );
