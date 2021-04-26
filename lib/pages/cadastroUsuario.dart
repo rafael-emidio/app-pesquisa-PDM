@@ -128,10 +128,10 @@ class _CadastroUsuario extends State<CadastroUsuario> {
 
   void _gravar() {
     UsuarioModel novoUsuario = UsuarioModel(
-      nome: _nomeInputController.text,
-      email: _emailInputController.text,
-      senha: _senhaInputController.text,
-      confirmaSenha: _confirmaSenhaInputController.text,
+      _nomeInputController.text,
+      _emailInputController.text,
+      _senhaInputController.text,
+      _confirmaSenhaInputController.text,
     );
     print(novoUsuario); //apenas para printar, retirar depois
   }
