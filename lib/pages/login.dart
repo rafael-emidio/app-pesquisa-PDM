@@ -1,10 +1,16 @@
+import 'package:app_pesquisa_pdm/models/usuarioModel.dart';
 import 'package:flutter/material.dart';
 import 'pagina_inicial.dart';
 import 'cadastroUsuario.dart';
 import 'cadastroEstabelecimento.dart';
+import 'dart:core';
+import 'package:flutter/cupertino.dart';
 
 class LoginPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
+  final _email = TextEditingController();
+  final _senha = TextEditingController();
+  int _validador;
 
   @override
   Widget build(BuildContext context) {
@@ -41,14 +47,11 @@ class LoginPage extends StatelessWidget {
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) {
+                  _email.text = value;
                   if (value == null || value.isEmpty) {
                     return 'Insira um e-mail cadastrado';
                   }
                   return null;
-                },
-                // apenas printando o valor, retirar futuramente
-                onSaved: (value) {
-                  print(value);
                 },
               ),
               SizedBox(
@@ -63,14 +66,11 @@ class LoginPage extends StatelessWidget {
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) {
+                  _senha.text = value;
                   if (value == null || value.isEmpty) {
                     return 'Insira sua senha';
                   }
                   return null;
-                },
-                // apenas printando o valor, retirar futuramente
-                onSaved: (value) {
-                  print(value);
                 },
               ),
               Container(
@@ -91,14 +91,20 @@ class LoginPage extends StatelessWidget {
                 onPressed: () {
                   final isValid = _formKey.currentState.validate();
                   if (isValid) {
-                    _formKey.currentState.save();
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            PaginaInicial(), // redireciona para página de login
-                      ),
-                    );
+                    listUsuario(_email.text, _senha.text);
+                    var validadeUsuario = listUsuario(_email.text, _senha.text);
+                    if (validadeUsuario == true) {
+                      _formKey.currentState.save();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              PaginaInicial(), // redireciona para página de login
+                        ),
+                      );
+                    } else {
+                      error(context);
+                    }
                   }
                 },
               ),
@@ -126,7 +132,7 @@ class LoginPage extends StatelessWidget {
                 alignment: Alignment.center,
                 child: FlatButton(
                   child: Text(
-                    "Solicitar Cadastro de Estabelecimento",
+                    "Solicitar cadastro de estabelecimento",
                     style: TextStyle(color: Colors.indigo, fontSize: 16),
                   ),
                   onPressed: () {
@@ -145,5 +151,28 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  error(BuildContext context) {
+    // exibe o dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Usuário/senha incorreto(s) ou usuário não cadastrado"),
+          actions: [
+            TextButton(
+              // ignore: missing_required_param
+              child: ElevatedButton(
+                child: Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop(false);
+                },
+              ),
+            ),
+          ],
+        );
+      },
+    ); // showDialog
   }
 }
