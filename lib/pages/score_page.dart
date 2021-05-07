@@ -1,5 +1,7 @@
 import 'package:app_pesquisa_pdm/services/auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:random_string/random_string.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import '../controllers/restaurante_controller.dart';
 import '../models/restauranteModel.dart';
 
@@ -76,7 +78,60 @@ class _ScorePageState extends State<ScorePage> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      Alert(
+                        context: context,
+                        //type: AlertType.info,
+                        image: Image.asset(
+                          "assets/images/cupom.png",
+                          width: 170,
+                        ),
+                        title: "Resgate de Cupom",
+                        desc:
+                            "Deseja resgatar um cupom de desconto para este estabelecimento ?",
+                        buttons: [
+                          DialogButton(
+                            child: Text(
+                              "RETORNAR",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 18),
+                            ),
+                            onPressed: () => Navigator.pop(context),
+                            width: 120,
+                          ),
+                          DialogButton(
+                            child: Text(
+                              "RESGATAR",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 18),
+                            ),
+                            onPressed: () {
+                              Alert(
+                                context: context,
+                                title: "CUPOM",
+                                content: Column(
+                                  children: <Widget>[
+                                    Text(randomNumeric(6)),
+                                  ],
+                                ),
+                                buttons: [
+                                  DialogButton(
+                                    child: Text(
+                                      "RETORNAR",
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 20),
+                                    ),
+                                    onPressed: () => Navigator.pop(context),
+                                    width: 120,
+                                  )
+                                ],
+                              ).show();
+                            },
+                            width: 120,
+                          )
+                        ],
+                      ).show();
+                    },
                   );
                 },
                 padding: EdgeInsets.all(16),

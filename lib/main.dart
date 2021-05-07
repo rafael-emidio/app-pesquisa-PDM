@@ -9,7 +9,7 @@ import './pages/checkauth.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  Get.lazyPut<AuthService>(()=> AuthService());
+  Get.lazyPut<AuthService>(() => AuthService());
 
   runApp(AppPesquisa());
 }
