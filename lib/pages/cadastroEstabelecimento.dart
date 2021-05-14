@@ -1,12 +1,15 @@
 import 'dart:io';
-
+import 'dart:ui';
+import 'package:app_pesquisa_pdm/widget/ExibeImage.dart';
 import 'package:brasil_fields/brasil_fields.dart';
-import 'package:camera_camera/camera_camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'ImagePreview.dart';
 import 'login.dart';
 import '../models/cadEstabelecimentoModel.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:camera_camera/camera_camera.dart';
 
 class CadastroEstabelecimento extends StatefulWidget {
   @override
@@ -18,10 +21,27 @@ class _CadastroEstabelecimento extends State<CadastroEstabelecimento> {
   TextEditingController _cnpjInputController = TextEditingController();
   TextEditingController _urlInputController = TextEditingController();
   TextEditingController _emailInputController = TextEditingController();
-
   final _formKey = GlobalKey<FormState>();
 
   File arquivo;
+  final picker = ImagePicker();
+
+  showPreview(file) async {
+    file = await Get.to(() => ImagePreview(file: file));
+
+    if (file != null) {
+      setState(() => arquivo = file);
+      Get.back();
+    }
+  }
+
+  Future getFileFromGallery() async {
+    final file = await picker.getImage(source: ImageSource.gallery);
+
+    if (file != null) {
+      setState(() => arquivo = File(file.path));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,25 +101,22 @@ class _CadastroEstabelecimento extends State<CadastroEstabelecimento> {
                   return null;
                 },
               ),
-              /*TextFormField(
-                controller: _urlInputController,
-                decoration: InputDecoration(labelText: 'Url da logo:'),
-                keyboardType: TextInputType.text,
-                validator: (_urlInputController) {
-                  if (_urlInputController == null ||
-                      _urlInputController.isEmpty) {
-                    return 'Preencha com a Url da logo de seu Restaurante';
-                  }
-                  return null;
-                },
-              ),*/
+              Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: Text(
+                  "Escolha uma imagem para logo",
+                  style: TextStyle(fontSize: 16),
+                ),
+              ),
               Row(
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(top: 70, left: 40),
                   ),
                   ElevatedButton.icon(
-                    onPressed: () => {},
+                    onPressed: () => Get.to(
+                      () => CameraCamera(onFile: (file) => showPreview(file)),
+                    ),
                     icon: Icon(Icons.camera_alt),
                     label: Text('Tirar Foto'),
                   ),
@@ -107,16 +124,17 @@ class _CadastroEstabelecimento extends State<CadastroEstabelecimento> {
                     padding: const EdgeInsets.only(left: 5),
                   ),
                   ElevatedButton.icon(
-                      onPressed: () {},
+                      onPressed: () => getFileFromGallery(),
                       icon: Icon(Icons.attach_file),
                       label: Text('Escolher Imagem'))
                 ],
               ),
+              if (arquivo != null) ExibeImage(arquivo: arquivo),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 0),
+                    padding: const EdgeInsets.only(top: 50),
                   ),
                   ElevatedButton(
                     child: Text(
