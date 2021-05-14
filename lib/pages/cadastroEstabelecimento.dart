@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:brasil_fields/brasil_fields.dart';
+import 'package:camera_camera/camera_camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -18,9 +21,12 @@ class _CadastroEstabelecimento extends State<CadastroEstabelecimento> {
 
   final _formKey = GlobalKey<FormState>();
 
+  File arquivo;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text('Cadastro Estabelecimento'),
       ),
@@ -64,18 +70,6 @@ class _CadastroEstabelecimento extends State<CadastroEstabelecimento> {
                 },
               ),
               TextFormField(
-                controller: _urlInputController,
-                decoration: InputDecoration(labelText: 'Url da logo:'),
-                keyboardType: TextInputType.text,
-                validator: (_urlInputController) {
-                  if (_urlInputController == null ||
-                      _urlInputController.isEmpty) {
-                    return 'Preencha com a Url da logo de seu Restaurante';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
                 controller: _emailInputController,
                 decoration: InputDecoration(labelText: 'E-mail:'),
                 keyboardType: TextInputType.emailAddress,
@@ -87,11 +81,42 @@ class _CadastroEstabelecimento extends State<CadastroEstabelecimento> {
                   return null;
                 },
               ),
+              /*TextFormField(
+                controller: _urlInputController,
+                decoration: InputDecoration(labelText: 'Url da logo:'),
+                keyboardType: TextInputType.text,
+                validator: (_urlInputController) {
+                  if (_urlInputController == null ||
+                      _urlInputController.isEmpty) {
+                    return 'Preencha com a Url da logo de seu Restaurante';
+                  }
+                  return null;
+                },
+              ),*/
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 70, left: 40),
+                  ),
+                  ElevatedButton.icon(
+                    onPressed: () => {},
+                    icon: Icon(Icons.camera_alt),
+                    label: Text('Tirar Foto'),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5),
+                  ),
+                  ElevatedButton.icon(
+                      onPressed: () {},
+                      icon: Icon(Icons.attach_file),
+                      label: Text('Escolher Imagem'))
+                ],
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 50),
+                    padding: const EdgeInsets.only(top: 0),
                   ),
                   ElevatedButton(
                     child: Text(
