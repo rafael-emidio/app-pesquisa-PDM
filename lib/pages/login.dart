@@ -99,7 +99,7 @@ class LoginPage extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (BuildContext context) =>
-                              PaginaInicial(), // redireciona para página de login
+                              PaginaInicial(), // redireciona para página inicial
                         ),
                       );
                     }
@@ -130,7 +130,7 @@ class LoginPage extends StatelessWidget {
                 alignment: Alignment.center,
                 child: FlatButton(
                   child: Text(
-                    "Solicitar cadastro de estabelecimento",
+                    "Cadastrar estabelecimento",
                     style: TextStyle(color: Colors.indigo, fontSize: 16),
                   ),
                   onPressed: () {

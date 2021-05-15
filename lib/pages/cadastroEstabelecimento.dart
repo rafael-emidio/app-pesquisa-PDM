@@ -1,15 +1,16 @@
 import 'dart:io';
 import 'dart:ui';
+import 'package:app_pesquisa_pdm/services/auth_service.dart';
 import 'package:app_pesquisa_pdm/widget/ExibeImage.dart';
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'ImagePreview.dart';
-import 'login.dart';
 import '../models/cadEstabelecimentoModel.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:camera_camera/camera_camera.dart';
+import 'checkauth.dart';
 
 class CadastroEstabelecimento extends StatefulWidget {
   @override
@@ -21,6 +22,9 @@ class _CadastroEstabelecimento extends State<CadastroEstabelecimento> {
   TextEditingController _cnpjInputController = TextEditingController();
   TextEditingController _urlInputController = TextEditingController();
   TextEditingController _emailInputController = TextEditingController();
+  TextEditingController _senhaInputController = TextEditingController();
+  TextEditingController _confirmaSenhaInputController = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
 
   File arquivo;
@@ -101,6 +105,37 @@ class _CadastroEstabelecimento extends State<CadastroEstabelecimento> {
                   return null;
                 },
               ),
+            TextFormField(
+                controller: _senhaInputController,
+                obscureText: true,
+                decoration: InputDecoration(labelText: 'Senha:'),
+                validator: (_senhaInputController) {
+                  if (_senhaInputController == null ||
+                  _senhaInputController.isEmpty) {
+                    return 'Insira uma senha';
+                  }
+                  if (_senhaInputController.length < 6) {
+                    return 'Insira uma senha com no mínimo 6 caracteres';
+                  }
+                  return null;
+                }
+            ),
+              TextFormField(
+                  controller: _confirmaSenhaInputController,
+                  obscureText: true,
+                  decoration: InputDecoration(labelText: 'Confirme a senha:'),
+                  validator: (_confirmaSenhaInputController) {
+                    if (_confirmaSenhaInputController == null ||
+                    _confirmaSenhaInputController.isEmpty) {
+                      return 'Confirme a senha';
+                    }
+                    if (_senhaInputController.text !=
+                        _confirmaSenhaInputController) {
+                      return 'As senha não coincidem, tente novamente';
+                    }
+                    return null;
+                  },
+              ),
               Padding(
                 padding: const EdgeInsets.only(top: 20),
                 child: Text(
@@ -143,16 +178,21 @@ class _CadastroEstabelecimento extends State<CadastroEstabelecimento> {
                     ),
                     onPressed: () {
                       final isValid = _formKey.currentState.validate();
+
                       if (isValid) {
-                        _gravar();
-                        _formKey.currentState.save();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                LoginPage(), // redireciona para página de login
-                          ),
-                        );
+                        if (arquivo != null){
+                          _gravarEstabelecimento();
+                          _formKey.currentState.save();
+                          Navigator.pop(
+                            context,
+                            MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  CheckAuth(), // redireciona para página de login
+                            ),
+                          );
+                        }else{
+                          error(context);
+                        }
                       }
                     },
                   )
@@ -165,13 +205,38 @@ class _CadastroEstabelecimento extends State<CadastroEstabelecimento> {
     );
   }
 
-  void _gravar() {
+  void _gravarEstabelecimento() async{
+    Future<String> url;
     CadEstabelecimentoModel novoEstabelecimento = CadEstabelecimentoModel(
       nome: _nomeInputController.text,
       cnpj: _cnpjInputController.text,
-      url: _urlInputController.text,
+      url: arquivo.path,
       email: _emailInputController.text,
+        senha: _senhaInputController.text
     );
-    print(novoEstabelecimento); //apenas para printar, retirar depois
+    AuthService.to.criarEstabelecimento(novoEstabelecimento, arquivo);
   }
+  error(BuildContext context) {
+    // exibe o dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Selecione uma imagem para a logo do estabelecimento"),
+          actions: [
+            TextButton(
+              // ignore: missing_required_param
+              child: ElevatedButton(
+                child: Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop(false);
+                },
+              ),
+            ),
+          ],
+        );
+      },
+    ); // showDialog
+  }
+
 }

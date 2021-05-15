@@ -139,6 +139,6 @@ class _CadastroUsuario extends State<CadastroUsuario> {
       _confirmaSenhaInputController.text,
     );
     print(novoUsuario); //apenas para printar, retirar depois
-    AuthService.to.criarUsuario(_emailInputController.text, _senhaInputController.text);
+    AuthService.to.criarUsuario(_emailInputController.text, _senhaInputController.text, _nomeInputController.text);
   }
 }

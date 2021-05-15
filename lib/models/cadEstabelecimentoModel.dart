@@ -4,9 +4,10 @@ class CadEstabelecimentoModel {
   String cnpj;
   String url;
   String email;
+  String senha;
 
   CadEstabelecimentoModel(
-      {this.id, this.nome, this.cnpj, this.url, this.email});
+      {this.id, this.nome, this.cnpj, this.url, this.email, this.senha});
 
   //apenas para printar, retirar depois
   String toString() {
@@ -17,6 +18,8 @@ class CadEstabelecimentoModel {
         "\nUrl da logo: " +
         this.url +
         "\nEmail: " +
-        this.email;
+        this.email +
+        "\nSenha: " +
+        this.senha;
   }
 }
