@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../banco/restaurantes_rep.dart';
 import '../controllers/restaurante_controller.dart';
 import '../models/restauranteModel.dart';
 import '../models/pesquisaModel.dart';
@@ -41,7 +43,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
             MaterialPageRoute(
                 builder: (BuildContext context) =>
                     ScorePage() // redireciona para página de pontuação do usuário
-            ));
+                ));
       } else if (_selectedIndex == 2) {
         AuthService.to.logout();
       }
@@ -70,37 +72,39 @@ class _PaginaInicialState extends State<PaginaInicial> {
           currentIndex: _selectedIndex,
           onTap: _onItemTapped,
         ),
-        body: ListView.separated(
-          itemCount: controller.restaurantes.length,
-          separatorBuilder: (_, __) => Divider(),
-          itemBuilder: (BuildContext context, int i) {
-            final List<RestauranteModel> lista =
-                controller.restaurantes; // lista de restaurantes
-            return ListTile(
-              leading: Image.network(
-                lista[i].url,
-                width: 65,
-              ),
-              title: Text(lista[i].nome),
-              trailing: Text('Sem média'),
-              //ao pressionar redireciona para a pagina de pesquisa referenciando o restaurante
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => Pesquisa(
-                          key: Key(lista[i]
-                              .id
-                              .toString()), //id do restaurante como chave
-                          restaurante: lista[i], // restaurante em si
-                          onSave: this
-                              .salvarPesquisa // método onSave retorna para página inicial ao concluir pesquisa
-                      ),
-                    ));
-              },
-            );
-          },
-          padding: EdgeInsets.all(16),
-        ));
+        body: Consumer<RestaurantesRep>(builder: (context, repositorio, child) {
+          return ListView.separated(
+            itemCount: repositorio.restaurantes.length,
+            separatorBuilder: (_, __) => Divider(),
+            itemBuilder: (BuildContext context, int i) {
+              final List<RestauranteModel> lista =
+                  repositorio.restaurantes; // lista de restaurantes
+              return ListTile(
+                leading: Image.network(
+                  lista[i].url,
+                  width: 65,
+                ),
+                title: Text(lista[i].nome),
+                trailing: Text('Sem média'),
+                //ao pressionar redireciona para a pagina de pesquisa referenciando o restaurante
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => Pesquisa(
+                            key: Key(lista[i]
+                                .id
+                                .toString()), //id do restaurante como chave
+                            restaurante: lista[i], // restaurante em si
+                            onSave: this
+                                .salvarPesquisa // método onSave retorna para página inicial ao concluir pesquisa
+                            ),
+                      ));
+                },
+              );
+            },
+            padding: EdgeInsets.all(16),
+          );
+        }));
   }
 }
