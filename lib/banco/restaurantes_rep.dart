@@ -1,5 +1,6 @@
 import 'dart:collection';
 
+import 'package:app_pesquisa_pdm/models/cupomModel.dart';
 import 'package:app_pesquisa_pdm/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
@@ -25,6 +26,22 @@ class RestaurantesRep extends ChangeNotifier {
 
   UnmodifiableListView<RestauranteModel> get restaurantesComResp =>
       UnmodifiableListView(_restaurantesComResp);
+
+  //lista de todos os cupons cadastrados
+  List<CupomModel> _cuponsRestaurante = [];
+
+  UnmodifiableListView<CupomModel> get cuponsRestaurante =>
+      UnmodifiableListView(_cuponsRestaurante);
+
+  //lista de todos os cupons cadastrados
+  double _mediaPesquisas = 0;
+
+  double get mediaPesquisas => _mediaPesquisas;
+
+  //lista de todos os cupons cadastrados
+  int _quantResp = 0;
+
+  int get quantResp => _quantResp;
 
   getRestaurantes() async {
     FirebaseFirestore db = await DBFirestore.get();
@@ -91,10 +108,85 @@ class RestaurantesRep extends ChangeNotifier {
     return _restaurantesComResp;
   }
 
+  getCuponsRest() async {
+    FirebaseFirestore db = await DBFirestore.get();
+    var snapRest = await db.collection('restaurantes')
+        .where('idAuth', isEqualTo: AuthService.to.user.uid)
+        .get();
+
+    snapRest.docs.forEach((doc) async {
+      var snapCupom = await db.collection('cupons')
+          .where('idRestaurante', isEqualTo: doc.id)
+          .get();
+      snapCupom.docs.forEach((element) {
+        final data = element.data();
+        _cuponsRestaurante.add(CupomModel(
+            element.id,
+            data['idRestaurante'],
+            data['idUser'],
+            data['cupom']
+        )
+        );
+      });
+    });
+    notifyListeners();
+    return _cuponsRestaurante;
+  }
+
+  getQuantRespondidas() async {
+    FirebaseFirestore db = await DBFirestore.get();
+    var snapRest = await db.collection('restaurantes')
+        .where('idAuth', isEqualTo: AuthService.to.user.uid)
+        .get();
+
+    snapRest.docs.forEach((doc) async {
+      var snapCupom = await db.collection('pesquisas')
+          .where('idRestaurante', isEqualTo: doc.id)
+          .get();
+      _quantResp = snapCupom.docs.length;
+      });
+    notifyListeners();
+    return _quantResp;
+  }
+
+  getMediaPesquisas() async {
+    FirebaseFirestore db = await DBFirestore.get();
+    double soma = 0;
+    var snapRest = await db.collection('restaurantes')
+        .where('idAuth', isEqualTo: AuthService.to.user.uid)
+        .get();
+
+    snapRest.docs.forEach((doc) async {
+      var snapCupom = await db.collection('pesquisas')
+          .where('idRestaurante', isEqualTo: doc.id)
+          .get();
+      snapCupom.docs.forEach((element) {
+        final data = element.data();
+        soma += (
+            double.tryParse(data['r1'].toString())
+                +double.tryParse(data['r2'].toString())
+                +double.tryParse(data['r3'].toString())
+                +double.tryParse(data['r4'].toString())
+                +double.tryParse(data['r5'].toString()))/5;
+      });
+      _mediaPesquisas = soma/snapCupom.docs.length;
+    });
+    notifyListeners();
+    return _mediaPesquisas;
+  }
+
+
+
   RestaurantesRep() {
     this.getRestaurantes();
     this.getRestaurantesSemResp();
     this.getRestaurantesComResp();
+    if(AuthService.to.usuarioRest.value){
+      this.getCuponsRest();
+      this.getMediaPesquisas();
+      this.getQuantRespondidas();
+    }
+
   }
 
 }

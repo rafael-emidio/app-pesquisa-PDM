@@ -1,3 +1,4 @@
+import 'package:app_pesquisa_pdm/services/FbService.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
@@ -6,6 +7,7 @@ import './services/auth_service.dart';
 import './pages/pagina_inicial.dart';
 import './pages/login.dart';
 import './pages/checkauth.dart';
+import 'banco/estab_rep.dart';
 import 'banco/restaurantes_rep.dart';
 
 void main() async {
@@ -13,8 +15,12 @@ void main() async {
   await Firebase.initializeApp();
   Get.lazyPut<AuthService>(() => AuthService());
 
-  runApp(ChangeNotifierProvider(
-      create: (context) => RestaurantesRep(), child: AppPesquisa()));
+  runApp(
+      ChangeNotifierProvider(
+          create: (context) => RestaurantesRep(),
+          child: AppPesquisa()
+      )
+  );
 }
 
 class AppPesquisa extends StatelessWidget {

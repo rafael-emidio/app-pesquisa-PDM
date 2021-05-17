@@ -1,5 +1,8 @@
 import 'dart:io';
+import 'package:app_pesquisa_pdm/banco/estab_rep.dart';
+import 'package:app_pesquisa_pdm/banco/restaurantes_rep.dart';
 import 'package:app_pesquisa_pdm/models/pesquisaModel.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../models/cadEstabelecimentoModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -18,7 +21,7 @@ class AuthService extends GetxController{
   Rx<User> _firebaseUser = Rx<User>(null);
   var usuarioAutenticado = false.obs;
   var usuarioRest = false.obs;
-  String _urlpic;
+  String nomeUser;
 
   @override
   void onInit(){
@@ -40,7 +43,6 @@ class AuthService extends GetxController{
     });
 
   }
-
   User get user => _firebaseUser.value;
   static AuthService get to => Get.find<AuthService>();
 
@@ -116,7 +118,47 @@ class AuthService extends GetxController{
         }
       );
     } catch(e){
-      showSnack('Erro ao registrar usuário', e.message);
+      showSnack('Erro ao registrar pesquisa', e.message);
+    }
+  }
+
+  Future<String> buscarCupom(String idrest) async{
+    String cupom = "";
+    FirebaseFirestore db = await DBFirestore.get();
+    try{
+      var snapshot = await db.collection('cupons')
+          .where('idRestaurante', isEqualTo: idrest)
+          .where('idUser', isEqualTo: AuthService.to.user.uid)
+          .get();
+      snapshot.docs.forEach((doc) async {
+          final data = doc.data();
+          cupom = data['cupom'];
+      });
+      return cupom;
+    } catch(e){
+      showSnack('Erro ao buscar cupom', e.message);
+    }
+    return cupom;
+  }
+  gravarCupom(idrest, cupom) async{
+    FirebaseFirestore db = await DBFirestore.get();
+    try{
+      db.collection('cupons').add({
+        'idRestaurante': idrest,
+        'idUser': user.uid,
+        'cupom': cupom
+      }
+      );
+    } catch(e){
+      showSnack('Erro ao registrar cupom', e.message);
+    }
+  }
+  excluirCupom(idcupom) async{
+    FirebaseFirestore db = await DBFirestore.get();
+    try{
+      db.collection('cupons')..doc(idcupom).delete();
+    } catch(e){
+      showSnack('Erro ao excluir cupom', e.message);
     }
   }
 

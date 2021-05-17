@@ -83,59 +83,7 @@ class _ScorePageState extends State<ScorePage> {
                           ),
                         ),
                         onTap: () {
-                          Alert(
-                            context: context,
-                            //type: AlertType.info,
-                            image: Image.asset(
-                              "assets/images/cupom.png",
-                              width: 170,
-                            ),
-                            title: "Resgate de Cupom",
-                            desc:
-                                "Deseja resgatar um cupom de desconto para este estabelecimento ?",
-                            buttons: [
-                              DialogButton(
-                                child: Text(
-                                  "RETORNAR",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 18),
-                                ),
-                                onPressed: () => Navigator.pop(context),
-                                width: 120,
-                              ),
-                              DialogButton(
-                                child: Text(
-                                  "RESGATAR",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 18),
-                                ),
-                                onPressed: () {
-                                  Alert(
-                                    context: context,
-                                    title: "CUPOM",
-                                    content: Column(
-                                      children: <Widget>[
-                                        Text(randomNumeric(6)),
-                                      ],
-                                    ),
-                                    buttons: [
-                                      DialogButton(
-                                        child: Text(
-                                          "RETORNAR",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 20),
-                                        ),
-                                        onPressed: () => Navigator.pop(context),
-                                        width: 120,
-                                      )
-                                    ],
-                                  ).show();
-                                },
-                                width: 120,
-                              )
-                            ],
-                          ).show();
+                          _mostraAlert(lista[i].id);
                         },
                       );
                     },
@@ -146,5 +94,96 @@ class _ScorePageState extends State<ScorePage> {
             );
           })),
     );
+  }
+  void _mostraAlert(idRest) async{
+    var cupom = await AuthService.to.buscarCupom(idRest);
+    print(cupom);
+    if(cupom == null || cupom == ""){
+      Alert(
+        context: context,
+        //type: AlertType.info,
+        image: Image.asset(
+          "assets/images/cupom.png",
+          width: 170,
+        ),
+        title: "Resgate de Cupom",
+        desc:
+        "Deseja resgatar um cupom de desconto para este estabelecimento ?",
+        buttons: [
+          DialogButton(
+            child: Text(
+              "RETORNAR",
+              style: TextStyle(
+                  color: Colors.white, fontSize: 18),
+            ),
+            onPressed: () => Navigator.pop(context),
+            width: 120,
+          ),
+          DialogButton(
+            child: Text(
+              "RESGATAR",
+              style: TextStyle(
+                  color: Colors.white, fontSize: 18),
+            ),
+            onPressed: () {
+              var cupom = randomNumeric(6);
+              _gravarCupom(idRest, cupom);
+              Alert(
+                context: context,
+                title: "CUPOM",
+                content: Column(
+                  children: <Widget>[
+                    Text(cupom),
+                  ],
+                ),
+                buttons: [
+                  DialogButton(
+                    child: Text(
+                      "RETORNAR",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20),
+                    ),
+                    onPressed: () => {
+                      Navigator.pop(context),
+                      Navigator.pop(context)
+                    },
+                    width: 120,
+                  )
+                ],
+              ).show();
+            },
+            width: 120,
+          )
+        ],
+      ).show();
+    }else{
+      Alert(
+        context: context,
+        title: "CUPOM",
+        content: Column(
+          children: <Widget>[
+            Text(cupom),
+          ],
+        ),
+        buttons: [
+          DialogButton(
+            child: Text(
+              "RETORNAR",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20),
+            ),
+            onPressed: () => Navigator.pop(context),
+            width: 120,
+          )
+        ],
+      ).show();
+    }
+
+  }
+
+  void _gravarCupom(idRest, cupom) async{
+    AuthService.to.gravarCupom(idRest, cupom);
   }
 }

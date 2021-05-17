@@ -54,7 +54,7 @@ class _CadastroEstabelecimento extends State<CadastroEstabelecimento> {
       appBar: AppBar(
         title: Text('Cadastro Estabelecimento'),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: EdgeInsets.only(top: 15, left: 10, right: 10),
         child: Form(
           key: _formKey,

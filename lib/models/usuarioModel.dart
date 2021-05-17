@@ -1,7 +1,7 @@
 import 'dart:core';
 
 class UsuarioModel {
-  int id;
+  String id;
   String nome;
   String email;
   String senha;
