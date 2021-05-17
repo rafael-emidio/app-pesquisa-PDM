@@ -206,7 +206,6 @@ class _CadastroEstabelecimento extends State<CadastroEstabelecimento> {
   }
 
   void _gravarEstabelecimento() async{
-    Future<String> url;
     CadEstabelecimentoModel novoEstabelecimento = CadEstabelecimentoModel(
       nome: _nomeInputController.text,
       cnpj: _cnpjInputController.text,
@@ -214,6 +213,7 @@ class _CadastroEstabelecimento extends State<CadastroEstabelecimento> {
       email: _emailInputController.text,
         senha: _senhaInputController.text
     );
+
     AuthService.to.criarEstabelecimento(novoEstabelecimento, arquivo);
   }
   error(BuildContext context) {

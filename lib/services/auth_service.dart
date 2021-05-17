@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:app_pesquisa_pdm/models/pesquisaModel.dart';
+
 import '../models/cadEstabelecimentoModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../banco/db_firestore.dart';
@@ -12,8 +14,10 @@ class AuthService extends GetxController{
   CadEstabelecimentoModel novoEstabelecimento;
   FirebaseAuth _auth = FirebaseAuth.instance;
   fb_storage.FirebaseStorage _storage = fb_storage.FirebaseStorage.instance;
+
   Rx<User> _firebaseUser = Rx<User>(null);
   var usuarioAutenticado = false.obs;
+  var usuarioRest = false.obs;
   String _urlpic;
 
   @override
@@ -21,11 +25,17 @@ class AuthService extends GetxController{
     super.onInit();
 
     _firebaseUser.bindStream(_auth.authStateChanges());
-    ever(_firebaseUser, (User user){
+    ever(_firebaseUser, (User user) async{
       if(user != null){
+        FirebaseFirestore db = await DBFirestore.get();
+        var snapshot = await db.collection('clientes').where('idAuth', isEqualTo: user.uid).get();
+        if(snapshot.docs.length <= 0){
+          usuarioRest.value = true;
+        }
         usuarioAutenticado.value = true;
       } else{
         usuarioAutenticado.value = false;
+        usuarioRest.value = false;
       }
     });
 
@@ -86,6 +96,25 @@ class AuthService extends GetxController{
         'cnpj': estab.cnpj,
         'url': url
       });
+    } catch(e){
+      showSnack('Erro ao registrar estabelecimento', e.message);
+    }
+  }
+
+  cadastrarPesquisa(PesquisaModel pesquisa) async{
+    FirebaseFirestore db = await DBFirestore.get();
+    try{
+      db.collection('pesquisas').add({
+          'idRestaurante': pesquisa.idrestaurante,
+          'idUser': pesquisa.iduser,
+          'r1': pesquisa.r1,
+          'r2': pesquisa.r2,
+          'r3': pesquisa.r3,
+          'r4': pesquisa.r4,
+          'r5': pesquisa.r5,
+          'comentario': pesquisa.comentario
+        }
+      );
     } catch(e){
       showSnack('Erro ao registrar usuário', e.message);
     }

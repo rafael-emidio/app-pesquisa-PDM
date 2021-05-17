@@ -11,6 +11,7 @@ import 'login.dart';
 import '../services/auth_service.dart';
 
 class PaginaInicial extends StatefulWidget {
+
   @override
   _PaginaInicialState createState() => _PaginaInicialState();
 }
@@ -28,7 +29,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
   salvarPesquisa(PesquisaModel pesquisa) {
     Navigator.pop(context);
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Obrigado por avaliar! sua resposta será salva.',
+        content: Text('Obrigado por avaliar! sua resposta foi salva.',
             style: TextStyle(fontSize: 16))));
   }
 
@@ -73,12 +74,13 @@ class _PaginaInicialState extends State<PaginaInicial> {
           onTap: _onItemTapped,
         ),
         body: Consumer<RestaurantesRep>(builder: (context, repositorio, child) {
+
           return ListView.separated(
-            itemCount: repositorio.restaurantes.length,
+            itemCount: repositorio.restaurantesSemResp.length,
             separatorBuilder: (_, __) => Divider(),
             itemBuilder: (BuildContext context, int i) {
               final List<RestauranteModel> lista =
-                  repositorio.restaurantes; // lista de restaurantes
+                  repositorio.restaurantesSemResp; // lista de restaurantes
               return ListTile(
                 leading: Image.network(
                   lista[i].url,

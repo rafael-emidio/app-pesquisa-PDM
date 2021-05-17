@@ -9,5 +9,8 @@ class PesquisaModel {
   int r5;
   String comentario;
 
-  PesquisaModel(this.id, this.iduser, this.idrestaurante, this.r1, this.r2, this.r3, this.r4, this.r5, this.comentario);
+  PesquisaModel(this.iduser, this.idrestaurante, this.r1, this.r2, this.r3, this.r4, this.r5, this.comentario);
+  String toString() {
+    return "{"+this.iduser+", "+this.idrestaurante+","+ this.r1.toString()+"," +this.r2.toString()+","+ this.r3.toString()+","+ this.r4.toString()+"," +this.r5.toString()+","+ this.comentario+"}";
+  }
 }

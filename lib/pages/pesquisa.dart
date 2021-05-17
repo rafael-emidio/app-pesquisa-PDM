@@ -1,3 +1,4 @@
+import 'package:app_pesquisa_pdm/services/auth_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -31,8 +32,11 @@ class _PesquisaState extends State<Pesquisa> {
   }
 
   //método que transforma texto em inteiro, retorna null em caso de erro
-  int inteiro(valor) {
-    return int.tryParse(valor);
+  int inteiro(String valor) {
+    //converte string para double
+    var doub = double.tryParse(valor);
+    //remove o ponto e converte para string
+    return int.tryParse(doub.round().toString());
   }
 
   @override
@@ -331,15 +335,15 @@ class _PesquisaState extends State<Pesquisa> {
                   } else {
                     if (_formKey.currentState.validate()) {
                       this.pesquisa = PesquisaModel(
-                          '1',
-                          '1',
-                          widget.restaurante.id.toString(),
-                          inteiro(_r1.text),
-                          inteiro(_r2.text),
-                          inteiro(_r3.text),
-                          inteiro(_r4.text),
-                          inteiro(_r5.text),
-                          _comentario.text);
+                        AuthService.to.user.uid,
+                        widget.restaurante.id.toString(),
+                        inteiro(_r1.text),
+                        inteiro(_r2.text),
+                        inteiro(_r3.text),
+                        inteiro(_r4.text),
+                        inteiro(_r5.text),
+                        _comentario.text);
+                      _gravarPesquisa(this.pesquisa);
                       widget.onSave(this.pesquisa);
                     }
                   }
@@ -360,6 +364,10 @@ class _PesquisaState extends State<Pesquisa> {
         ),
       ),
     );
+  }
+
+  void _gravarPesquisa(PesquisaModel pesq) async{
+    AuthService.to.cadastrarPesquisa(pesq);
   }
 
   error(BuildContext context) {

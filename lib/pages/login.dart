@@ -95,13 +95,6 @@ class LoginPage extends StatelessWidget {
                     AuthService.to.login(_email.text, _senha.text);
                     if (AuthService.to.usuarioAutenticado.value == true) {
                       _formKey.currentState.save();
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              PaginaInicial(), // redireciona para página inicial
-                        ),
-                      );
                     }
                   }
                 },

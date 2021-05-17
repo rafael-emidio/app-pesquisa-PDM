@@ -63,11 +63,11 @@ class _ScorePageState extends State<ScorePage> {
                 ),
                 Container(
                   child: ListView.separated(
-                    itemCount: repositorio.restaurantes.length,
+                    itemCount: repositorio.restaurantesComResp.length,
                     separatorBuilder: (_, __) => Divider(),
                     itemBuilder: (BuildContext context, int i) {
                       final List<RestauranteModel> lista =
-                          repositorio.restaurantes; // lista de restaurantes
+                          repositorio.restaurantesComResp; // lista de restaurantes
                       return ListTile(
                         leading: Image.network(
                           lista[i].url,
